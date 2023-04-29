@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Common-->
+    <dimen name="common_padding_min">8dp</dimen>
+    <dimen name="common_padding_default">16dp</dimen>
+    <dimen name="common_padding_middle">24dp</dimen>
+    <dimen name="common_padding_big">32dp</dimen>
+    <dimen name="common_padding_extra">48dp</dimen>
+
+    <!--MainView-->
+    <dimen name="main_toolbar_elevation">4dp</dimen>
+</resources>
