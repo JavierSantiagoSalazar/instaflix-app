@@ -10,4 +10,14 @@
         android:name="com.javierestudio.instaflixapp.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.javierestudio.instaflixapp.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" />
+    <fragment
+        android:id="@+id/tvShowFragment"
+        android:name="com.javierestudio.instaflixapp.TvShowFragment"
+        android:label="fragment_tv_show"
+        tools:layout="@layout/fragment_tv_show" />
 </navigation>
