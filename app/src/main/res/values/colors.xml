@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <!--Global-->
     <color name="gray_semitransparent">#121212</color>
+    <color name="fragments_background_color">#DA000000</color>
     <!--BottomNavigationColors-->
     <color name="bottom_navigation_unselected_icon">#7E7E7E</color>
 </resources>

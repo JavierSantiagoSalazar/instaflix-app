@@ -2,6 +2,7 @@ package com.javierestudio.instaflixapp
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.javierestudio.instaflixapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
 
         mBinding.toolbar.setOnMenuItemClickListener {menuItem ->
             when (menuItem.itemId) {

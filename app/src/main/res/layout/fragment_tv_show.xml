@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     android:background="@color/fragments_background_color"
     android:orientation="vertical"
-    tools:context=".HomeFragment">
+    tools:context=".TvShowFragment">
 
     <TextView
-        android:id="@+id/tvPopularMovies"
+        android:id="@+id/tvActionTvShows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/common_padding_middle"
         android:layout_marginStart="@dimen/common_padding_min"
-        android:text="@string/tv_popular_movies"
+        android:text="Popular Action Tv Shows"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -31,12 +31,12 @@
         tools:listitem="@layout/item_movie" />
 
     <TextView
-        android:id="@+id/tvPopularSeries"
+        android:id="@+id/tvComedyTvShows"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="@dimen/common_padding_middle"
         android:layout_marginStart="@dimen/common_padding_min"
-        android:text="@string/tv_popular_tv_shows"
+        android:text="Popular Comedy Tv Shows"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/white"
         android:textSize="18sp"
