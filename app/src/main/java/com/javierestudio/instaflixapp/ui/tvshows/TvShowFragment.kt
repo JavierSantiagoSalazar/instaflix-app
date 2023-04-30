@@ -1,8 +1,9 @@
-package com.javierestudio.instaflixapp
+package com.javierestudio.instaflixapp.ui.tvshows
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.FragmentTvShowBinding
 
 class TvShowFragment : Fragment(R.layout.fragment_tv_show) {

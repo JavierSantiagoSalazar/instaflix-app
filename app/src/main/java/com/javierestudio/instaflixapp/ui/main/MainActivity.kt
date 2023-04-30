@@ -1,8 +1,8 @@
-package com.javierestudio.instaflixapp
+package com.javierestudio.instaflixapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.ui.setupActionBarWithNavController
+import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
