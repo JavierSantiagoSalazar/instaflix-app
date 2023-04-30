@@ -1,11 +1,9 @@
-package com.javierestudio.instaflixapp
+package com.javierestudio.instaflixapp.ui.movies
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import com.javierestudio.instaflixapp.databinding.FragmentHomeBinding
+import androidx.fragment.app.Fragment
+import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.FragmentMovieBinding
 
 class MovieFragment : Fragment(R.layout.fragment_movie) {

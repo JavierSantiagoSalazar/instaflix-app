@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.javierestudio.instaflixapp.AspectRatioImageView
+        <com.javierestudio.instaflixapp.ui.common.AspectRatioImageView
             android:id="@+id/imMovieImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

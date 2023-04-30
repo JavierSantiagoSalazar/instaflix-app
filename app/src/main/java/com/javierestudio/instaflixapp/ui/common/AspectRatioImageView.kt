@@ -1,8 +1,9 @@
-package com.javierestudio.instaflixapp
+package com.javierestudio.instaflixapp.ui.common
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
+import com.javierestudio.instaflixapp.R
 
 class AspectRatioImageView @JvmOverloads constructor(
     context: Context,
