@@ -6,6 +6,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.javierestudio.domain.Movie
+import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.ui.common.PermissionRequester
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
@@ -26,6 +27,11 @@ class HomeState(
 ) {
 
     fun onMovieClicked(movie: Movie) {
+        //val action = HomeFragmentDirections.actionMainToDetail(movie.id)
+        //navController.navigate(action)
+    }
+
+    fun onTvShowClicked(tvShow: TvShow) {
         //val action = HomeFragmentDirections.actionMainToDetail(movie.id)
         //navController.navigate(action)
     }

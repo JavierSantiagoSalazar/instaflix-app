@@ -1,13 +1,13 @@
-package com.javierestudio.instaflixapp.data.database
+package com.javierestudio.instaflixapp.data.database.movie
 
-import com.javierestudio.data.datasource.MovieLocalDataSource
+import com.javierestudio.data.datasource.movie.MovieLocalDataSource
+import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
 import com.javierestudio.instaflixapp.data.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.javierestudio.domain.Error
 import javax.inject.Inject
-import com.javierestudio.instaflixapp.data.database.Movie as DbMovie
+import com.javierestudio.instaflixapp.data.database.movie.Movie as DbMovie
 
 class MovieLocalDataSourceImpl @Inject constructor(
     private val movieDao: MovieDao,

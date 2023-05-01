@@ -1,4 +1,4 @@
-package com.javierestudio.instaflixapp.data.database
+package com.javierestudio.instaflixapp.data.database.movie
 
 import androidx.room.Dao
 import androidx.room.Insert

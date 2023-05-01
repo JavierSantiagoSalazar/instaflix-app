@@ -43,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvActionMovie"
                 app:spanCount="1"
-                tools:listitem="@layout/item_movie" />
+                tools:listitem="@layout/item_program" />
 
             <TextView
                 android:id="@+id/tvComedyMovie"
@@ -71,7 +71,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvComedyMovie"
                 app:spanCount="1"
-                tools:listitem="@layout/item_movie" />
+                tools:listitem="@layout/item_program" />
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/progress"

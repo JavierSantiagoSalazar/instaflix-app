@@ -1,4 +1,4 @@
-package com.javierestudio.data.datasource
+package com.javierestudio.data.datasource.movie
 
 import arrow.core.Either
 import com.javierestudio.domain.Error
