@@ -50,6 +50,7 @@ dependencies {
     implementation Libs.AndroidX.appCompat
     implementation Libs.AndroidX.material
     implementation Libs.AndroidX.recyclerView
+    implementation Libs.AndroidX.swipeRefresh
     implementation Libs.AndroidX.constraintLayout
 
     implementation Libs.playServicesLocation
@@ -61,8 +62,6 @@ dependencies {
 
     implementation Libs.AndroidX.Lifecycle.viewmodelKtx
     implementation Libs.AndroidX.Lifecycle.runtimeKtx
-
-    //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
 
     implementation Libs.OkHttp3.loginInterceptor
     implementation Libs.Retrofit.retrofit
