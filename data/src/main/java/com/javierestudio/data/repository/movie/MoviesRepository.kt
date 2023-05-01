@@ -1,7 +1,8 @@
-package com.javierestudio.data
+package com.javierestudio.data.repository.movie
 
-import com.javierestudio.data.datasource.MovieLocalDataSource
-import com.javierestudio.data.datasource.MovieRemoteDataSource
+import com.javierestudio.data.RegionRepository
+import com.javierestudio.data.datasource.movie.MovieLocalDataSource
+import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
 import kotlinx.coroutines.flow.Flow

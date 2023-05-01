@@ -1,7 +1,7 @@
-package com.javierestudio.instaflixapp.data.server
+package com.javierestudio.instaflixapp.data.server.movies
 
 import arrow.core.Either
-import com.javierestudio.data.datasource.MovieRemoteDataSource
+import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
 import com.javierestudio.instaflixapp.data.tryCall
@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 class MovieRemoteDataSourceImpl @Inject constructor(
     @ApiKey private val apiKey: String,
-    private val remoteService: RemoteService
+    private val movieRemoteService: MovieRemoteService
 ): MovieRemoteDataSource {
     override suspend fun findPopularMovies(region: String): Either<Error, List<Movie>> = tryCall {
-        remoteService
+        movieRemoteService
             .listPopularMovies(apiKey, region)
             .results
             .toDomainModel()

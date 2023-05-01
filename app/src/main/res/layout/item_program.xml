@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvMovie"
     android:layout_width="160dp"
-    android:layout_height="wrap_content"
+    android:layout_height="240dp"
     android:layout_marginHorizontal="@dimen/common_padding_min"
     android:layout_marginVertical="@dimen/common_padding_min"
     android:background="@color/cardview_light_background"
@@ -17,7 +17,7 @@
         android:background="@color/black">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imMovieImage"
+            android:id="@+id/imProgramImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="1dp"
@@ -39,7 +39,7 @@
     </FrameLayout>
 
     <TextView
-        android:id="@+id/tvMovieTitle"
+        android:id="@+id/tvProgramTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"

@@ -1,6 +1,6 @@
-package com.javierestudio.usecases
+package com.javierestudio.usecases.movie
 
-import com.javierestudio.data.MoviesRepository
+import com.javierestudio.data.repository.movie.MoviesRepository
 import com.javierestudio.domain.Error
 import javax.inject.Inject
 

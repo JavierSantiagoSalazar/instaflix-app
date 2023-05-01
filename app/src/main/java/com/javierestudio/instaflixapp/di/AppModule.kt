@@ -4,16 +4,22 @@ import android.app.Application
 import androidx.room.Room
 import com.javierestudio.data.PermissionChecker
 import com.javierestudio.data.datasource.LocationDataSource
-import com.javierestudio.data.datasource.MovieLocalDataSource
-import com.javierestudio.data.datasource.MovieRemoteDataSource
+import com.javierestudio.data.datasource.movie.MovieLocalDataSource
+import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
+import com.javierestudio.data.datasource.thshow.TvShowLocalDataSource
+import com.javierestudio.data.datasource.thshow.TvShowRemoteDataSource
 import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.data.AndroidPermissionChecker
 import com.javierestudio.instaflixapp.data.PlayServicesLocationDataSource
-import com.javierestudio.instaflixapp.data.database.MovieDao
-import com.javierestudio.instaflixapp.data.database.MovieLocalDataSourceImpl
-import com.javierestudio.instaflixapp.data.database.MovieTvShowDatabase
-import com.javierestudio.instaflixapp.data.server.MovieRemoteDataSourceImpl
-import com.javierestudio.instaflixapp.data.server.RemoteService
+import com.javierestudio.instaflixapp.data.database.InstaFlixAppDatabase
+import com.javierestudio.instaflixapp.data.database.movie.MovieDao
+import com.javierestudio.instaflixapp.data.database.movie.MovieLocalDataSourceImpl
+import com.javierestudio.instaflixapp.data.database.tvshow.TvShowDao
+import com.javierestudio.instaflixapp.data.database.tvshow.TvShowLocalDataSourceImpl
+import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteDataSourceImpl
+import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteService
+import com.javierestudio.instaflixapp.data.server.tvshows.TvShowRemoteDataSourceImpl
+import com.javierestudio.instaflixapp.data.server.tvshows.TvShowRemoteService
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -23,7 +29,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 import javax.inject.Singleton
 
 @Module
@@ -39,13 +44,17 @@ object AppModule {
     @Singleton
     fun provideDatabase(app: Application) = Room.databaseBuilder(
         app,
-        MovieTvShowDatabase::class.java,
-        "movie-tv-show-db"
+        InstaFlixAppDatabase::class.java,
+        "insta-flix-app-db"
     ).build()
 
     @Provides
     @Singleton
-    fun provideMovieDao(db: MovieTvShowDatabase): MovieDao = db.movieDao()
+    fun provideMovieDao(db: InstaFlixAppDatabase): MovieDao = db.movieDao()
+
+    @Provides
+    @Singleton
+    fun provideTvShowDao(db: InstaFlixAppDatabase): TvShowDao = db.tvShowDao()
 
     @Provides
     @Singleton
@@ -61,13 +70,24 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRemoteService(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): RemoteService {
+    fun provideRetrofit(@ApiUrl apiUrl: String, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .baseUrl(apiUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMovieService(retrofit: Retrofit): MovieRemoteService {
+        return retrofit.create(MovieRemoteService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTvShowService(retrofit: Retrofit): TvShowRemoteService {
+        return retrofit.create(TvShowRemoteService::class.java)
     }
 
 }
@@ -77,10 +97,16 @@ object AppModule {
 abstract class AppDataModule {
 
     @Binds
-    abstract fun bindLocalDataSource(localDataSource: MovieLocalDataSourceImpl): MovieLocalDataSource
+    abstract fun bindMovieLocalDataSource(movieLocalDataSource: MovieLocalDataSourceImpl): MovieLocalDataSource
 
     @Binds
-    abstract fun bindRemoteDataSource(remoteDataSource: MovieRemoteDataSourceImpl): MovieRemoteDataSource
+    abstract fun bindTvShowLocalDataSource(tvShowLocalDataSource: TvShowLocalDataSourceImpl): TvShowLocalDataSource
+
+    @Binds
+    abstract fun bindMovieRemoteDataSource(movieRemoteMovieDataSource: MovieRemoteDataSourceImpl): MovieRemoteDataSource
+
+    @Binds
+    abstract fun bindTvShowRemoteDataSource(tvShowRemoteDataSource: TvShowRemoteDataSourceImpl): TvShowRemoteDataSource
 
     @Binds
     abstract fun bindLocationDataSource(locationDataSource: PlayServicesLocationDataSource): LocationDataSource
