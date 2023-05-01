@@ -12,7 +12,6 @@ class MoviesRepository@Inject constructor(
     private val localDataSource: MovieLocalDataSource,
     private val remoteDataSource: MovieRemoteDataSource
 ) {
-
     val popularMovies get() = localDataSource.movies
 
     fun findById(id: Int): Flow<Movie> = localDataSource.findById(id)
@@ -31,5 +30,4 @@ class MoviesRepository@Inject constructor(
         val updatedMovie = movie.copy(favorite = !movie.favorite)
         return localDataSource.save(listOf(updatedMovie))
     }
-
 }

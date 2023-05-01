@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cvMovie"
-    android:layout_width="220dp"
+    android:layout_width="160dp"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/common_padding_min"
     android:layout_marginVertical="@dimen/common_padding_min"
@@ -13,14 +13,16 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/black">
 
-        <com.javierestudio.instaflixapp.ui.common.AspectRatioImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imMovieImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="1dp"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:ratio="1"
             tools:src="@tools:sample/backgrounds/scenic" />
 
@@ -41,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="@color/gray_semitransparent"
+        android:background="#33000000"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="2"
@@ -49,6 +51,7 @@
         android:padding="@dimen/common_padding_min"
         android:textColor="@color/white"
         android:textSize="14sp"
+        android:textStyle="bold"
         tools:text="Superman" />
 
 </androidx.cardview.widget.CardView>
