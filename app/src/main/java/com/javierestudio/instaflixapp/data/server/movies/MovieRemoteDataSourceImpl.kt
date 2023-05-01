@@ -12,6 +12,7 @@ class MovieRemoteDataSourceImpl @Inject constructor(
     @ApiKey private val apiKey: String,
     private val movieRemoteService: MovieRemoteService
 ): MovieRemoteDataSource {
+
     override suspend fun findPopularMovies(region: String): Either<Error, List<Movie>> = tryCall {
         movieRemoteService
             .listPopularMovies(apiKey, region)
@@ -19,6 +20,12 @@ class MovieRemoteDataSourceImpl @Inject constructor(
             .toDomainModel()
     }
 
+    override suspend fun findMoviesByGenre(genreId: Int): Either<Error, List<Movie>> = tryCall {
+        movieRemoteService
+            .listMoviesByGenre(apiKey, genreId)
+            .results
+            .toDomainModel()
+    }
 }
 
 private fun List<RemoteMovie>.toDomainModel(): List<Movie> = map { it.toDomainModel() }
@@ -34,6 +41,7 @@ private fun RemoteMovie.toDomainModel(): Movie =
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
         popularity = popularity,
+        genreIds = genreIds,
         voteAverage = voteAverage,
         favorite = false
     )

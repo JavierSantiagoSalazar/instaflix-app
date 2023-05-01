@@ -14,6 +14,8 @@ class MoviesRepository@Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource
 ) {
     val popularMovies get() = localDataSource.movies
+    val actionMovies get() = localDataSource.actionMovies
+    val comedyMovies get() = localDataSource.comedyMovies
 
     fun findById(id: Int): Flow<Movie> = localDataSource.findById(id)
 
@@ -27,8 +29,31 @@ class MoviesRepository@Inject constructor(
         return null
     }
 
+    suspend fun requestActionMovies(): Error? {
+        if (localDataSource.isMoviesByGenreEmpty(ACTION_GENRE_ID)) {
+            val actionMovies = remoteDataSource.findMoviesByGenre(ACTION_GENRE_ID)
+            actionMovies.fold(ifLeft = { return it }) {
+                localDataSource.save(it)
+            }
+        }
+        return null
+    }
+
+    suspend fun requestComedyMovies(): Error? {
+        if (localDataSource.isMoviesByGenreEmpty(COMEDY_GENRE_ID)) {
+            val actionMovies = remoteDataSource.findMoviesByGenre(COMEDY_GENRE_ID)
+            actionMovies.fold(ifLeft = { return it }) {
+                localDataSource.save(it)
+            }
+        }
+        return null
+    }
+
     suspend fun switchFavorite(movie: Movie): Error? {
         val updatedMovie = movie.copy(favorite = !movie.favorite)
         return localDataSource.save(listOf(updatedMovie))
     }
 }
+
+const val ACTION_GENRE_ID = 28
+const val COMEDY_GENRE_ID = 35

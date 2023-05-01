@@ -14,14 +14,20 @@ class MovieLocalDataSourceImpl @Inject constructor(
 ) : MovieLocalDataSource {
 
     override val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }
+    override val actionMovies: Flow<List<Movie>> =
+        movieDao.getMoviesByGenre(ACTION_GENRE_ID).map { it.toDomainModel() }
+    override val comedyMovies: Flow<List<Movie>> =
+        movieDao.getMoviesByGenre(COMEDY_GENRE_ID).map { it.toDomainModel() }
 
 
     override suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
+    override suspend fun isMoviesByGenreEmpty(genre: Int): Boolean =
+        movieDao.movieCountByGenreId(genre) == 0
 
     override fun findById(id: Int): Flow<Movie> = movieDao.findById(id).map { it.toDomainModel() }
 
     override suspend fun save(movies: List<Movie>): Error? = tryCall {
-        movieDao.insertMovies(movies.map { it.fromDomainModel() })
+        movieDao.insertMovies(movies.fromDomainModel() )
     }.fold(
         ifLeft = { it },
         ifRight = { null }
@@ -40,6 +46,7 @@ private fun DbMovie.toDomainModel(): Movie =
         backdropPath = backdropPath,
         originalLanguage = originalLanguage,
         originalTitle = originalTitle,
+        genreIds = genreIds,
         popularity = popularity,
         voteAverage = voteAverage,
         favorite = favorite
@@ -55,8 +62,12 @@ private fun Movie.fromDomainModel(): DbMovie = DbMovie(
     posterPath = posterPath,
     backdropPath = backdropPath,
     originalLanguage = originalLanguage,
+    genreIds = genreIds,
     originalTitle = originalTitle,
     popularity = popularity,
     voteAverage = voteAverage,
     favorite = favorite
 )
+
+const val ACTION_GENRE_ID = 28
+const val COMEDY_GENRE_ID = 35

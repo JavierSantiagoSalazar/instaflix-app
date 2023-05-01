@@ -11,4 +11,10 @@ interface MovieRemoteService {
         @Query("region") region: String
     ): TopRatedMovieRemoteResult
 
+    @GET("discover/movie?sort_by=popularity.desc")
+    suspend fun listMoviesByGenre(
+        @Query("api_key") apiKey: String,
+        @Query("with_genres") genre: Int
+    ): TopRatedMovieRemoteResult
+
 }
