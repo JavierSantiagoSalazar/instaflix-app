@@ -3,21 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/home_dest">
 
     <fragment
-        android:id="@+id/homeFragment"
+        android:id="@+id/home_dest"
         android:name="com.javierestudio.instaflixapp.ui.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home"/>
     <fragment
-        android:id="@+id/movieFragment"
+        android:id="@+id/movie_dest"
         android:name="com.javierestudio.instaflixapp.ui.movies.MovieFragment"
         android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie" />
+        tools:layout="@layout/fragment_movie"/>
     <fragment
-        android:id="@+id/tvShowFragment"
+        android:id="@+id/tv_show_dest"
         android:name="com.javierestudio.instaflixapp.ui.tvshows.TvShowFragment"
         android:label="fragment_tv_show"
-        tools:layout="@layout/fragment_tv_show" />
+        tools:layout="@layout/fragment_tv_show"/>
 </navigation>

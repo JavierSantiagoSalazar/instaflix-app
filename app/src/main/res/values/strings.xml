@@ -4,10 +4,9 @@
     <string name="snack_bar_dismiss_message">Dismiss</string>
 
     <!--MainActivity-->
-    <string name="toolbar_home_title">Home</string>
     <string name="menu_title_home">Home</string>
     <string name="menu_title_movies">Movies</string>
-    <string name="menu_title_series">Series</string>
+    <string name="menu_title_tv_shows">Tv Shows</string>
     <string name="menu_toolbar_title">Search</string>
 
     <!--HomeFragment-->
@@ -17,6 +16,12 @@
     <string name="snack_bar_try_again_message">Try again</string>
     <string name="server_error">"Internal server error with code: "</string>
     <string name="unknown_error">"Unknown error: "</string>
+    <string name="tv_home_toolbar_title">Home</string>
 
+    <!--MovieFragment-->
+    <string name="tv_movie_toolbar_title">Movies</string>
+
+    <!--TvShows Fragment-->
+    <string name="tv_tv_show_toolbar_title">Tv Shows</string>
 
 </resources>

@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/home_dest"
         android:icon="@drawable/ic_menu_home"
         android:title="@string/menu_title_home"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/navigation_movies"
+        android:id="@+id/movie_dest"
         android:icon="@drawable/ic_menu_movies"
         android:title="@string/menu_title_movies"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/navigation_series"
+        android:id="@+id/tv_show_dest"
         android:icon="@drawable/ic_menu_series"
-        android:title="@string/menu_title_series"
+        android:title="@string/menu_title_tv_shows"
         app:showAsAction="ifRoom" />
 </menu>

@@ -10,15 +10,14 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/gray_semitransparent"
+        android:background="@color/darker_gray"
         android:elevation="@dimen/main_toolbar_elevation"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/toolbar_menu"
-        app:navigationIcon="@drawable/ic_netflix_logo"
-        app:titleTextColor="@color/white">
+        app:navigationIcon="@drawable/ic_netflix_logo">
 
         <TextView
             android:id="@+id/tvToolbarTitle"
@@ -26,11 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="@string/toolbar_home_title"
             android:textAppearance="?attr/textAppearanceBody2"
             android:textColor="@color/white"
             android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:text="Home" />
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.fragment.app.FragmentContainerView
@@ -49,7 +48,7 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/gray_semitransparent"
+        android:background="@color/darker_gray"
         app:itemIconTint="@drawable/bottom_navigation_selector"
         app:itemRippleColor="@color/black"
         app:itemTextColor="@drawable/bottom_navigation_selector"
