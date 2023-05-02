@@ -2,14 +2,11 @@ package com.javierestudio.instaflixapp.ui.home
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.FragmentHomeBinding
-import com.javierestudio.instaflixapp.ui.common.launchAndCollect
-import com.javierestudio.instaflixapp.ui.common.setVisibleOrGone
-import com.javierestudio.instaflixapp.ui.common.showErrorSnackBar
+import com.javierestudio.instaflixapp.ui.common.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

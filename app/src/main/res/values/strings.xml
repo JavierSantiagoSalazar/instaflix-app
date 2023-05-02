@@ -20,8 +20,11 @@
 
     <!--MovieFragment-->
     <string name="tv_movie_toolbar_title">Movies</string>
-
+    <string name="tv_popular_action_movies">Popular Action Movies</string>
+    <string name="tv_popular_comedy_movies">Popular Comedy Movies</string>
     <!--TvShows Fragment-->
     <string name="tv_tv_show_toolbar_title">Tv Shows</string>
+    <string name="tv_popular_animation_tv_shows">Popular Animation Tv Shows</string>
+    <string name="tv_popular_drama_tv_shows">Popular Drama Tv Shows</string>
 
 </resources>

@@ -19,6 +19,13 @@ class TvShowRemoteDataSourceImpl @Inject constructor(
             .results
             .toDomainModel()
     }
+
+    override suspend fun findTvShowsByGenre(genreId: Int): Either<Error, List<TvShow>> = tryCall {
+        tvShowRemoteService
+            .listTvShowsByGenre(apiKey, genreId)
+            .results
+            .toDomainModel()
+    }
 }
 
 private fun List<RemoteTvShow>.toDomainModel(): List<TvShow> = map { it.toDomainModel() }

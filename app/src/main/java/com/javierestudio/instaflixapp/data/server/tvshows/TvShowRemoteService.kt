@@ -5,10 +5,14 @@ import retrofit2.http.Query
 
 interface TvShowRemoteService {
 
-    @GET("discover/tv?language=en-US&sort_by=popularity.desc")
+    @GET("discover/tv?sort_by=popularity.desc")
     suspend fun listPopularTvShows(
         @Query("api_key") apiKey: String,
     ): TopRatedTvShowsRemoteResult
 
+    @GET("discover/tv?sort_by=popularity.desc")
+    suspend fun listTvShowsByGenre(
+        @Query("api_key") apiKey: String,
+        @Query("with_genres") genre: Int
+    ): TopRatedTvShowsRemoteResult
 }
-
