@@ -1,6 +1,7 @@
 package com.javierestudio.data.repository.movie
 
 import com.javierestudio.data.RegionRepository
+import com.javierestudio.data.common.Constants.POPULAR_GENRE_ID
 import com.javierestudio.data.datasource.movie.MovieLocalDataSource
 import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
 import com.javierestudio.domain.Error
@@ -8,10 +9,10 @@ import com.javierestudio.domain.Movie
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MoviesRepository@Inject constructor(
+class MoviesRepository @Inject constructor(
     private val regionRepository: RegionRepository,
     private val localDataSource: MovieLocalDataSource,
-    private val remoteDataSource: MovieRemoteDataSource
+    private val remoteDataSource: MovieRemoteDataSource,
 ) {
     val popularMovies get() = localDataSource.movies
     val actionMovies get() = localDataSource.actionMovies
@@ -23,27 +24,17 @@ class MoviesRepository@Inject constructor(
         if (localDataSource.isEmpty()) {
             val movies = remoteDataSource.findPopularMovies(regionRepository.findLastRegion())
             movies.fold(ifLeft = { return it }) {
-                localDataSource.save(it)
+                localDataSource.save(it, POPULAR_GENRE_ID)
             }
         }
         return null
     }
 
-    suspend fun requestActionMovies(): Error? {
-        if (localDataSource.isMoviesByGenreEmpty(ACTION_GENRE_ID)) {
-            val actionMovies = remoteDataSource.findMoviesByGenre(ACTION_GENRE_ID)
-            actionMovies.fold(ifLeft = { return it }) {
-                localDataSource.save(it)
-            }
-        }
-        return null
-    }
-
-    suspend fun requestComedyMovies(): Error? {
-        if (localDataSource.isMoviesByGenreEmpty(COMEDY_GENRE_ID)) {
-            val actionMovies = remoteDataSource.findMoviesByGenre(COMEDY_GENRE_ID)
-            actionMovies.fold(ifLeft = { return it }) {
-                localDataSource.save(it)
+    suspend fun requestMovieByGenreId(genreId: Int): Error? {
+        if (localDataSource.isMoviesEmptyByGenreId(genreId)) {
+            val genreMovies = remoteDataSource.findMoviesByGenre(genreId)
+            genreMovies.fold(ifLeft = { return it }) {
+                localDataSource.save(it, genreId)
             }
         }
         return null
@@ -51,9 +42,6 @@ class MoviesRepository@Inject constructor(
 
     suspend fun switchFavorite(movie: Movie): Error? {
         val updatedMovie = movie.copy(favorite = !movie.favorite)
-        return localDataSource.save(listOf(updatedMovie))
+        return localDataSource.save(listOf(updatedMovie), 5)
     }
 }
-
-const val ACTION_GENRE_ID = 28
-const val COMEDY_GENRE_ID = 35

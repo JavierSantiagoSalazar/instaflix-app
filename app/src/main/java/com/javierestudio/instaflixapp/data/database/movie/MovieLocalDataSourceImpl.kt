@@ -1,8 +1,12 @@
 package com.javierestudio.instaflixapp.data.database.movie
 
+import com.javierestudio.data.common.Constants.ACTION_GENRE_ID
+import com.javierestudio.data.common.Constants.COMEDY_GENRE_ID
 import com.javierestudio.data.datasource.movie.MovieLocalDataSource
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
+import com.javierestudio.instaflixapp.data.database.ProgramType
+import com.javierestudio.instaflixapp.data.database.convertToProgramType
 import com.javierestudio.instaflixapp.data.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -15,19 +19,21 @@ class MovieLocalDataSourceImpl @Inject constructor(
 
     override val movies: Flow<List<Movie>> = movieDao.getAll().map { it.toDomainModel() }
     override val actionMovies: Flow<List<Movie>> =
-        movieDao.getMoviesByGenre(ACTION_GENRE_ID).map { it.toDomainModel() }
+        movieDao.getMoviesByGenreId(ACTION_GENRE_ID.convertToProgramType())
+            .map { it.toDomainModel() }
     override val comedyMovies: Flow<List<Movie>> =
-        movieDao.getMoviesByGenre(COMEDY_GENRE_ID).map { it.toDomainModel() }
+        movieDao.getMoviesByGenreId(COMEDY_GENRE_ID.convertToProgramType())
+            .map { it.toDomainModel() }
 
 
     override suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
-    override suspend fun isMoviesByGenreEmpty(genre: Int): Boolean =
-        movieDao.movieCountByGenreId(genre) == 0
+    override suspend fun isMoviesEmptyByGenreId(genreId: Int): Boolean =
+        movieDao.movieCountByProgramType(genreId.convertToProgramType()) == 0
 
     override fun findById(id: Int): Flow<Movie> = movieDao.findById(id).map { it.toDomainModel() }
 
-    override suspend fun save(movies: List<Movie>): Error? = tryCall {
-        movieDao.insertMovies(movies.fromDomainModel() )
+    override suspend fun save(movies: List<Movie>, genreId: Int): Error? = tryCall {
+        movieDao.insertMovies(movies.fromDomainModel(genreId.convertToProgramType()))
     }.fold(
         ifLeft = { it },
         ifRight = { null }
@@ -52,9 +58,10 @@ private fun DbMovie.toDomainModel(): Movie =
         favorite = favorite
     )
 
-private fun List<Movie>.fromDomainModel(): List<DbMovie> = map { it.fromDomainModel() }
+private fun List<Movie>.fromDomainModel(programType: ProgramType): List<DbMovie> =
+    map { it.fromDomainModel(programType) }
 
-private fun Movie.fromDomainModel(): DbMovie = DbMovie(
+private fun Movie.fromDomainModel(programType: ProgramType): DbMovie = DbMovie(
     id = id,
     title = title,
     overview = overview,
@@ -66,8 +73,6 @@ private fun Movie.fromDomainModel(): DbMovie = DbMovie(
     originalTitle = originalTitle,
     popularity = popularity,
     voteAverage = voteAverage,
-    favorite = favorite
+    favorite = favorite,
+    programType = programType
 )
-
-const val ACTION_GENRE_ID = 28
-const val COMEDY_GENRE_ID = 35

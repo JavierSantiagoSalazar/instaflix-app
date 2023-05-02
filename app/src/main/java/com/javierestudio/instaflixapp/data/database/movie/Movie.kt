@@ -3,6 +3,7 @@ package com.javierestudio.instaflixapp.data.database.movie
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
+import com.javierestudio.instaflixapp.data.database.ProgramType
 
 @Entity
 data class Movie(
@@ -17,6 +18,7 @@ data class Movie(
     val originalTitle: String,
     val popularity: Double,
     val voteAverage: Double,
+    val programType: ProgramType,
     val favorite: Boolean
 )
 
