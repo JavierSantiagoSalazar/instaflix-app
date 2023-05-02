@@ -30,7 +30,7 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
             recyclerComedyMovies.adapter = comedyMoviesAdapter
         }
 
-        movieState = buildMoviesState()
+        movieState = buildMoviesState().apply { setToolbarTitle() }
 
         viewLifecycleOwner.launchAndCollect(viewModel.state) {
             binding.progress.setVisibleOrGone(it.loading)
@@ -44,10 +44,5 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
         }
 
         viewModel.onUiReady()
-
-        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).run {
-            this.text = context.getString(R.string.tv_movie_toolbar_title)
-        }
     }
-
 }
