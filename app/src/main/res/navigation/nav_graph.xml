@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/movie_dest"
-        android:name="com.javierestudio.instaflixapp.ui.movies.MovieFragment"
+        android:name="com.javierestudio.instaflixapp.ui.movies.MoviesFragment"
         android:label="fragment_movie"
         tools:layout="@layout/fragment_movie"/>
     <fragment

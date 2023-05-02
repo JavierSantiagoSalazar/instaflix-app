@@ -29,7 +29,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             recyclerSeries.adapter = tvShowsAdapter
         }
 
-        homeState = buildHomeState()
+        homeState = buildHomeState().apply { setToolbarTitle() }
 
         viewLifecycleOwner.launchAndCollect(viewModel.state) {
             binding.progress.setVisibleOrGone(it.loading)
@@ -44,10 +44,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         homeState.requestLocationPermission {
             viewModel.onUiReady()
-        }
-
-        requireActivity().findViewById<TextView>(R.id.tvToolbarTitle).run {
-            this.text = context.getString(R.string.tv_home_toolbar_title)
         }
     }
 }
