@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/fragments_background_color"
     android:paddingHorizontal="10dp"
-    tools:context=".ui.tvshows.TvShowFragment">
+    tools:context=".ui.tvshows.TvShowsFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -18,22 +18,22 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/tvActionTvShows"
+                android:id="@+id/tvAnimationTvShows"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/common_padding_min"
                 android:layout_marginTop="@dimen/common_padding_middle"
-                android:text="Popular Action Tv Shows"
+                android:text="@string/tv_popular_animation_tv_shows"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/recyclerMovies"
+                app:layout_constraintBottom_toTopOf="@id/recyclerAnimationTvShow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerMovies"
+                android:id="@+id/recyclerAnimationTvShow"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_marginTop="@dimen/common_padding_middle"
@@ -41,26 +41,26 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvActionTvShows"
+                app:layout_constraintTop_toBottomOf="@id/tvAnimationTvShows"
                 app:spanCount="1"
                 tools:listitem="@layout/item_program" />
 
             <TextView
-                android:id="@+id/tvComedyTvShows"
+                android:id="@+id/tvDramaTvShows"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/common_padding_min"
                 android:layout_marginTop="@dimen/common_padding_middle"
-                android:text="Popular Comedy Tv Shows"
+                android:text="@string/tv_popular_drama_tv_shows"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recyclerMovies" />
+                app:layout_constraintTop_toBottomOf="@id/recyclerAnimationTvShow" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerSeries"
+                android:id="@+id/recyclerDramaTvShow"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
                 android:layout_marginTop="@dimen/common_padding_middle"
@@ -69,7 +69,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvComedyTvShows"
+                app:layout_constraintTop_toBottomOf="@id/tvDramaTvShows"
                 app:spanCount="1"
                 tools:listitem="@layout/item_program" />
 

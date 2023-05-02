@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_movie"/>
     <fragment
         android:id="@+id/tv_show_dest"
-        android:name="com.javierestudio.instaflixapp.ui.tvshows.TvShowFragment"
+        android:name="com.javierestudio.instaflixapp.ui.tvshows.TvShowsFragment"
         android:label="fragment_tv_show"
         tools:layout="@layout/fragment_tv_show"/>
 </navigation>

@@ -2,6 +2,7 @@ package com.javierestudio.instaflixapp.data.database.tvshow
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.javierestudio.instaflixapp.data.database.ProgramType
 
 @Entity
 data class TvShow(
@@ -16,4 +17,5 @@ data class TvShow(
     val popularity: Double,
     val voteAverage: Double,
     val favorite: Boolean,
+    val programType: ProgramType
 )
