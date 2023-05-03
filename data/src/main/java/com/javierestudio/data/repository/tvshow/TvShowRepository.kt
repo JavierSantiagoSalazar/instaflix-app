@@ -4,6 +4,7 @@ import com.javierestudio.data.common.Constants.POPULAR_GENRE_ID
 import com.javierestudio.data.datasource.thshow.TvShowLocalDataSource
 import com.javierestudio.data.datasource.thshow.TvShowRemoteDataSource
 import com.javierestudio.domain.Error
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -18,8 +19,9 @@ class TvShowRepository @Inject constructor(
 
     fun findById(id: Int): Flow<TvShow> = localDataSource.findById(id)
 
-    suspend fun requestPopularTvShows(): Error? {
-        if (localDataSource.isEmpty()) {
+    suspend fun requestPopularTvShows(isRefreshing: Boolean): Error? {
+        if (localDataSource.isEmpty() || isRefreshing) {
+            localDataSource.deleteTvShowsByGenre(ProgramGenre.POPULAR)
             val tvShows = remoteDataSource.findPopularTvShows()
             tvShows.fold(ifLeft = { return it }) {
                 localDataSource.save(it, POPULAR_GENRE_ID)
@@ -28,18 +30,18 @@ class TvShowRepository @Inject constructor(
         return null
     }
 
-    suspend fun requestMovieByGenreId(genreId: Int): Error? {
-        if (localDataSource.isTvShowsEmptyByGenreId(genreId)) {
+    suspend fun requestMovieByGenreId(
+        isRefreshing: Boolean,
+        genreId: Int,
+        programGenre: ProgramGenre,
+    ): Error? {
+        if (localDataSource.isTvShowsEmptyByGenreId(genreId) || isRefreshing) {
+            localDataSource.deleteTvShowsByGenre(programGenre)
             val genreMovies = remoteDataSource.findTvShowsByGenre(genreId)
             genreMovies.fold(ifLeft = { return it }) {
                 localDataSource.save(it, genreId)
             }
         }
         return null
-    }
-
-    suspend fun switchFavorite(tvShow: TvShow): Error? {
-        val updatedTvShow = tvShow.copy(favorite = !tvShow.favorite)
-        return localDataSource.save(listOf(updatedTvShow),5)
     }
 }

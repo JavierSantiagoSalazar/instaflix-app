@@ -6,6 +6,7 @@ import com.javierestudio.data.datasource.movie.MovieLocalDataSource
 import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
+import com.javierestudio.domain.ProgramGenre
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -20,8 +21,9 @@ class MoviesRepository @Inject constructor(
 
     fun findById(id: Int): Flow<Movie> = localDataSource.findById(id)
 
-    suspend fun requestPopularMovies(): Error? {
-        if (localDataSource.isEmpty()) {
+    suspend fun requestPopularMovies(isRefreshing: Boolean): Error? {
+        if (localDataSource.isEmpty() || isRefreshing) {
+            localDataSource.deleteMoviesByGenre(ProgramGenre.POPULAR)
             val movies = remoteDataSource.findPopularMovies(regionRepository.findLastRegion())
             movies.fold(ifLeft = { return it }) {
                 localDataSource.save(it, POPULAR_GENRE_ID)
@@ -30,18 +32,18 @@ class MoviesRepository @Inject constructor(
         return null
     }
 
-    suspend fun requestMovieByGenreId(genreId: Int): Error? {
-        if (localDataSource.isMoviesEmptyByGenreId(genreId)) {
+    suspend fun requestMovieByGenreId(
+        isRefreshing: Boolean,
+        genreId: Int,
+        programGenre: ProgramGenre,
+    ): Error? {
+        if (localDataSource.isMoviesEmptyByGenreId(genreId) || isRefreshing) {
+            localDataSource.deleteMoviesByGenre(programGenre)
             val genreMovies = remoteDataSource.findMoviesByGenre(genreId)
             genreMovies.fold(ifLeft = { return it }) {
                 localDataSource.save(it, genreId)
             }
         }
         return null
-    }
-
-    suspend fun switchFavorite(movie: Movie): Error? {
-        val updatedMovie = movie.copy(favorite = !movie.favorite)
-        return localDataSource.save(listOf(updatedMovie), 5)
     }
 }

@@ -27,6 +27,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
         val binding = FragmentMovieBinding.bind(view).apply {
             recyclerActionMovies.adapter = actionMoviesAdapter
             recyclerComedyMovies.adapter = comedyMoviesAdapter
+            swipeRefresh.setOnRefreshListener {
+                viewModel.getPrograms(true)
+                swipeRefresh.isRefreshing = false
+            }
         }
 
         movieState = buildMoviesState().apply { setToolbarTitle() }
@@ -37,11 +41,11 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
             comedyMoviesAdapter.submitList(it.comedyMovies)
             it.error?.let { error ->
                 view.showErrorSnackBar(error) {
-                    viewModel.onUiReady()
+                    viewModel.getPrograms()
                 }
             }
         }
 
-        viewModel.onUiReady()
+        viewModel.getPrograms()
     }
 }

@@ -2,6 +2,7 @@ package com.javierestudio.data.datasource.movie
 
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
+import com.javierestudio.domain.ProgramGenre
 import kotlinx.coroutines.flow.Flow
 
 interface MovieLocalDataSource {
@@ -13,5 +14,8 @@ interface MovieLocalDataSource {
     suspend fun isMoviesEmptyByGenreId(genreId: Int): Boolean
 
     fun findById(id: Int): Flow<Movie>
+
     suspend fun save(movies: List<Movie>, genreId: Int): Error?
+
+    suspend fun deleteMoviesByGenre(genre: ProgramGenre): Error?
 }

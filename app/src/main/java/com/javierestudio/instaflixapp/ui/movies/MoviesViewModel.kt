@@ -6,11 +6,13 @@ import com.javierestudio.data.common.Constants.ACTION_GENRE_ID
 import com.javierestudio.data.common.Constants.COMEDY_GENRE_ID
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.data.toError
 import com.javierestudio.usecases.movie.GetActionMoviesUseCase
 import com.javierestudio.usecases.movie.GetComedyMoviesUseCase
 import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -38,11 +40,19 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
-    fun onUiReady() {
+    fun getPrograms(isRefreshing: Boolean = false) {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
-            val actionMoviesError = requestMoviesByGenreIdUseCase(ACTION_GENRE_ID)
-            val comedyMoviesError = requestMoviesByGenreIdUseCase(COMEDY_GENRE_ID)
+            val actionMoviesError = requestMoviesByGenreIdUseCase(
+                isRefreshing = isRefreshing,
+                genreId = ACTION_GENRE_ID,
+                programGenre = ProgramGenre.ACTION
+            )
+            val comedyMoviesError = requestMoviesByGenreIdUseCase(
+                isRefreshing = isRefreshing,
+                genreId = COMEDY_GENRE_ID,
+                programGenre = ProgramGenre.COMEDY
+            )
             _state.value = _state.value.copy(loading = false, error = actionMoviesError)
             _state.value = _state.value.copy(loading = false, error = comedyMoviesError)
         }

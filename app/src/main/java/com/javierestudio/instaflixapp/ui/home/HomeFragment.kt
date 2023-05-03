@@ -24,6 +24,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val binding = FragmentHomeBinding.bind(view).apply {
             recyclerMovies.adapter = moviesAdapter
             recyclerSeries.adapter = tvShowsAdapter
+            swipeRefresh.setOnRefreshListener {
+                viewModel.getPrograms(true)
+                swipeRefresh.isRefreshing = false
+            }
         }
 
         homeState = buildHomeState().apply { setToolbarTitle() }
@@ -34,13 +38,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             tvShowsAdapter.submitList(it.tvShows)
             it.error?.let { error ->
                 view.showErrorSnackBar(error) {
-                    viewModel.onUiReady()
+                    viewModel.getPrograms()
                 }
             }
         }
 
         homeState.requestLocationPermission {
-            viewModel.onUiReady()
+            viewModel.getPrograms()
         }
     }
 }

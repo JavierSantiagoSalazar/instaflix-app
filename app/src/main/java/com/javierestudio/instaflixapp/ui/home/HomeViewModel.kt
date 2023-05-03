@@ -39,11 +39,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun onUiReady() {
+    fun getPrograms(isRefreshing: Boolean = false) {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
-            val moviesError = requestPopularMoviesUseCase()
-            val tvShowsError = requestPopularTvShowsUseCase()
+            val moviesError = requestPopularMoviesUseCase(isRefreshing)
+            val tvShowsError = requestPopularTvShowsUseCase(isRefreshing)
             _state.value = _state.value.copy(loading = false, error = moviesError)
             _state.value = _state.value.copy(loading = false, error = tvShowsError)
         }

@@ -17,6 +17,7 @@ import com.javierestudio.domain.Error
 import com.javierestudio.instaflixapp.R
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.text.DecimalFormat
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int, attachToRoot: Boolean = true): View =
     LayoutInflater.from(context).inflate(layoutRes, this, attachToRoot)
@@ -60,6 +61,10 @@ fun View.showSnackBar(
     }
 }
 
+fun View.showSnackBarFunctionality(duration: Int = Snackbar.LENGTH_SHORT, ) {
+    Snackbar.make(this, context.getString(R.string.snack_bar_functionality), duration).show()
+}
+
 fun View.showNoInternetConnectionSnackBar(message: String, isIndefinite: Boolean = true, tryAgain: () -> Unit) {
     val duration = if (isIndefinite) Snackbar.LENGTH_INDEFINITE else Snackbar.LENGTH_LONG
     Snackbar.make(this, message, duration).apply {
@@ -91,3 +96,6 @@ fun View.showErrorSnackBar(error: Error, action: () -> Unit){
         else -> this.showSnackBar(this.context.errorToString(error))
     }
 }
+
+fun Double.format(): String = DecimalFormat("#,##0").format(this)
+

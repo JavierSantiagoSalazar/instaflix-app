@@ -2,6 +2,7 @@
     <!--Global-->
     <string name="app_name">InstaFlixApp</string>
     <string name="snack_bar_dismiss_message">Dismiss</string>
+    <string name="snack_bar_functionality">Functionality on the way</string>
 
     <!--MainActivity-->
     <string name="menu_title_home">Home</string>
@@ -22,9 +23,18 @@
     <string name="tv_movie_toolbar_title">Movies</string>
     <string name="tv_popular_action_movies">Popular Action Movies</string>
     <string name="tv_popular_comedy_movies">Popular Comedy Movies</string>
+
     <!--TvShows Fragment-->
     <string name="tv_tv_show_toolbar_title">Tv Shows</string>
     <string name="tv_popular_animation_tv_shows">Popular Animation Tv Shows</string>
     <string name="tv_popular_drama_tv_shows">Popular Drama Tv Shows</string>
+
+    <!--Detail Fragment-->
+    <string name="ic_share">Share</string>
+    <string name="ic_download">Download</string>
+    <string name="ic_favorite">Favorite</string>
+    <string name="ic_bar">|</string>
+    <string name="tv_release_date">Release date</string>
+    <string name="tv_total_votes">Total votes: </string>
 
 </resources>

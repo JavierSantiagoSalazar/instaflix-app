@@ -10,7 +10,7 @@
     <!--Global-->
     <color name="darker_gray">#121212</color>
     <color name="fragments_background_color">#171C2C</color>
+    <color name="red_color">#FD0000</color>
     <!--BottomNavigationColors-->
     <color name="bottom_navigation_unselected_icon">#7E7E7E</color>
-
 </resources>

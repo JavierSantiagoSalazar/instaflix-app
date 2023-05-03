@@ -3,9 +3,12 @@ package com.javierestudio.instaflixapp.data.server.tvshows
 import arrow.core.Either
 import com.javierestudio.data.datasource.thshow.TvShowRemoteDataSource
 import com.javierestudio.domain.Error
+import com.javierestudio.domain.ProgramGenre
+import com.javierestudio.domain.ProgramType
 import com.javierestudio.domain.TvShow
+import com.javierestudio.instaflixapp.data.database.convertToProgramGenre
 import com.javierestudio.instaflixapp.data.tryCall
-import com.javierestudio.instaflixapp.di.ApiKey
+import com.javierestudio.instaflixapp.di.annotations.ApiKey
 import javax.inject.Inject
 
 class TvShowRemoteDataSourceImpl @Inject constructor(
@@ -17,20 +20,21 @@ class TvShowRemoteDataSourceImpl @Inject constructor(
         tvShowRemoteService
             .listPopularTvShows(apiKey)
             .results
-            .toDomainModel()
+            .toDomainModel(ProgramGenre.POPULAR)
     }
 
     override suspend fun findTvShowsByGenre(genreId: Int): Either<Error, List<TvShow>> = tryCall {
         tvShowRemoteService
             .listTvShowsByGenre(apiKey, genreId)
             .results
-            .toDomainModel()
+            .toDomainModel(genreId.convertToProgramGenre())
     }
 }
 
-private fun List<RemoteTvShow>.toDomainModel(): List<TvShow> = map { it.toDomainModel() }
+private fun List<RemoteTvShow>.toDomainModel(programGenre: ProgramGenre): List<TvShow> =
+    map { it.toDomainModel(programGenre) }
 
-private fun RemoteTvShow.toDomainModel(): TvShow =
+private fun RemoteTvShow.toDomainModel(programGenre: ProgramGenre): TvShow =
     TvShow(
         id = id,
         name = name,
@@ -42,5 +46,6 @@ private fun RemoteTvShow.toDomainModel(): TvShow =
         originalName = originalName,
         popularity = popularity,
         voteAverage = voteAverage,
-        favorite = false
+        programType = ProgramType.TV_SHOW,
+        programGenre = programGenre
     )

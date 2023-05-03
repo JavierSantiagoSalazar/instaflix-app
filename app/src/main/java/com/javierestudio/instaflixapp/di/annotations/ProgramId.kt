@@ -1,7 +1,7 @@
-package com.javierestudio.instaflixapp.di
+package com.javierestudio.instaflixapp.di.annotations
 
 import javax.inject.Qualifier
 
 @Retention(AnnotationRetention.BINARY)
 @Qualifier
-annotation class ApiUrl
+annotation class ProgramId

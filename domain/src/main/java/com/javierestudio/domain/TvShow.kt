@@ -11,5 +11,6 @@ data class TvShow(
     val originalName: String,
     val popularity: Double,
     val voteAverage: Double,
-    val favorite: Boolean
+    val programType: ProgramType,
+    val programGenre: ProgramGenre
 )

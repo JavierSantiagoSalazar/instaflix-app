@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RequestPopularTvShowsUseCase @Inject constructor(private val moviesRepository: TvShowRepository) {
 
-    suspend operator fun invoke(): Error? {
-        return moviesRepository.requestPopularTvShows()
+    suspend operator fun invoke(isRefreshing: Boolean): Error? {
+        return moviesRepository.requestPopularTvShows(isRefreshing)
     }
 }

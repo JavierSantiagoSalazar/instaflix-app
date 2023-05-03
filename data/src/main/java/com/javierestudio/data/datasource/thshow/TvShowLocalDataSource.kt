@@ -1,6 +1,7 @@
 package com.javierestudio.data.datasource.thshow
 
 import com.javierestudio.domain.Error
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import kotlinx.coroutines.flow.Flow
 
@@ -14,4 +15,6 @@ interface TvShowLocalDataSource {
 
     fun findById(id: Int): Flow<TvShow>
     suspend fun save(tvShow: List<TvShow>, genreId: Int): Error?
+
+    suspend fun deleteTvShowsByGenre(genre: ProgramGenre): Error?
 }

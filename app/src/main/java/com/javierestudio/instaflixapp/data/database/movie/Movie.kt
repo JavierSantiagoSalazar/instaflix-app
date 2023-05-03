@@ -3,11 +3,11 @@ package com.javierestudio.instaflixapp.data.database.movie
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverter
-import com.javierestudio.instaflixapp.data.database.ProgramType
+import com.javierestudio.domain.ProgramGenre
 
 @Entity
 data class Movie(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val title: String,
     val overview: String,
     val releaseDate: String,
@@ -18,8 +18,7 @@ data class Movie(
     val originalTitle: String,
     val popularity: Double,
     val voteAverage: Double,
-    val programType: ProgramType,
-    val favorite: Boolean
+    val programGenre: ProgramGenre,
 )
 
 class IntegerListConverter {
