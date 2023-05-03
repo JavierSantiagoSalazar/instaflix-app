@@ -1,4 +1,4 @@
-package com.javierestudio.instaflixapp.di
+package com.javierestudio.instaflixapp.di.annotations
 
 import javax.inject.Qualifier
 

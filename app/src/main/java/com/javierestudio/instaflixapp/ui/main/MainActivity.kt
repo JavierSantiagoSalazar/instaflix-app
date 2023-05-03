@@ -2,13 +2,11 @@ package com.javierestudio.instaflixapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.navigation.NavigationView
 import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.ActivityMainBinding
+import com.javierestudio.instaflixapp.ui.common.showSnackBarFunctionality
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         mBinding.toolbar.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.action_settings -> {
-                    println("Incoming action")
+                    mBinding.root.showSnackBarFunctionality()
                     true
                 }
                 else -> false

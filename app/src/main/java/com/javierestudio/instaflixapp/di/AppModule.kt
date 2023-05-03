@@ -20,9 +20,12 @@ import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteDataSourceIm
 import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteService
 import com.javierestudio.instaflixapp.data.server.tvshows.TvShowRemoteDataSourceImpl
 import com.javierestudio.instaflixapp.data.server.tvshows.TvShowRemoteService
+import com.javierestudio.instaflixapp.di.annotations.ApiKey
+import com.javierestudio.instaflixapp.di.annotations.ApiUrl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
+import dagger.Reusable
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -79,13 +82,13 @@ object AppModule {
     }
 
     @Provides
-    @Singleton
+    @Reusable
     fun provideMovieService(retrofit: Retrofit): MovieRemoteService {
         return retrofit.create(MovieRemoteService::class.java)
     }
 
     @Provides
-    @Singleton
+    @Reusable
     fun provideTvShowService(retrofit: Retrofit): TvShowRemoteService {
         return retrofit.create(TvShowRemoteService::class.java)
     }

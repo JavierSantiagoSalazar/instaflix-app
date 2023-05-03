@@ -32,13 +32,13 @@ class HomeState(
 ) {
 
     fun onMovieClicked(movie: Movie) {
-        //val action = HomeFragmentDirections.actionMainToDetail(movie.id)
-        //navController.navigate(action)
+        val action = HomeFragmentDirections.actionHomeToDetail(movie.programType, movie.id)
+        navController.navigate(action)
     }
 
     fun onTvShowClicked(tvShow: TvShow) {
-        //val action = HomeFragmentDirections.actionMainToDetail(movie.id)
-        //navController.navigate(action)
+        val action = HomeFragmentDirections.actionHomeToDetail(tvShow.programType, tvShow.id)
+        navController.navigate(action)
     }
 
     fun requestLocationPermission(afterRequest: (Boolean) -> Unit) {

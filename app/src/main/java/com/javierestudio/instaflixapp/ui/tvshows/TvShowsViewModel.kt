@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.javierestudio.data.common.Constants.ANIMATION_GENRE_ID
 import com.javierestudio.data.common.Constants.DRAMA_GENRE_ID
 import com.javierestudio.domain.Error
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.data.toError
 import com.javierestudio.usecases.tvshow.GetAnimationTvShowsUseCase
@@ -38,11 +39,19 @@ class TvShowsViewModel @Inject constructor(
         }
     }
 
-    fun onUiReady() {
+    fun getPrograms(isRefreshing: Boolean = false) {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true)
-            val animationTvShowsError = requestTvShowsByGenreIdUseCase(ANIMATION_GENRE_ID)
-            val dramaTvShowsError = requestTvShowsByGenreIdUseCase(DRAMA_GENRE_ID)
+            val animationTvShowsError = requestTvShowsByGenreIdUseCase(
+                isRefreshing = isRefreshing,
+                genreId = ANIMATION_GENRE_ID,
+                programGenre = ProgramGenre.ANIMATION
+            )
+            val dramaTvShowsError = requestTvShowsByGenreIdUseCase(
+                isRefreshing = isRefreshing,
+                genreId = DRAMA_GENRE_ID,
+                programGenre = ProgramGenre.DRAMA
+            )
             _state.value = _state.value.copy(loading = false, error = animationTvShowsError)
             _state.value = _state.value.copy(loading = false, error = dramaTvShowsError)
         }

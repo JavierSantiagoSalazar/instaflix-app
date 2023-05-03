@@ -13,4 +13,6 @@
         <item name="android:statusBarColor">#3E0505</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="AppTheme.DarkOverlay" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 </resources>

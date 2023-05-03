@@ -19,14 +19,18 @@ class TvShowsFragment : Fragment(R.layout.fragment_tv_show) {
 
     private lateinit var tvShowState: TvShowsState
 
-    private val animationTvShowsAdapter = TvShowsAdapter { tvShowState.onMovieClicked(it) }
-    private val dramaTvShowsAdapter = TvShowsAdapter { tvShowState.onMovieClicked(it) }
+    private val animationTvShowsAdapter = TvShowsAdapter { tvShowState.onTvShowClicked(it) }
+    private val dramaTvShowsAdapter = TvShowsAdapter { tvShowState.onTvShowClicked(it) }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentTvShowBinding.bind(view).apply {
             recyclerAnimationTvShow.adapter = animationTvShowsAdapter
             recyclerDramaTvShow.adapter = dramaTvShowsAdapter
+            swipeRefresh.setOnRefreshListener {
+                viewModel.getPrograms(true)
+                swipeRefresh.isRefreshing = false
+            }
         }
         tvShowState = buildTvShowsFragment().apply { setToolbarTitle() }
 
@@ -36,11 +40,11 @@ class TvShowsFragment : Fragment(R.layout.fragment_tv_show) {
             dramaTvShowsAdapter.submitList(it.dramaTvShows)
             it.error?.let { error ->
                 view.showErrorSnackBar(error) {
-                    viewModel.onUiReady()
+                    viewModel.getPrograms()
                 }
             }
         }
 
-        viewModel.onUiReady()
+        viewModel.getPrograms()
     }
 }
