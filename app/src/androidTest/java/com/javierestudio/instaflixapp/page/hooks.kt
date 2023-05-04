@@ -1,43 +1,49 @@
 package com.javierestudio.instaflixapp.page
 
 import androidx.recyclerview.widget.RecyclerView
-import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.*
+import com.javierestudio.instaflixapp.R
+import org.hamcrest.CoreMatchers.allOf
 
 fun clickInRecyclerItem(recyclerId: Int, itemPosition: Int) {
-    Espresso.onView(ViewMatchers.withId(recyclerId))
+    onView(withId(recyclerId))
         .perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(itemPosition,
-                ViewActions.click()
+                click()
             )
         )
 }
 
 fun verifyItemTextInRecyclerView(recyclerId: Int, text: String) {
-    Espresso.onView(ViewMatchers.withId(recyclerId))
+    onView(withId(recyclerId))
         .check(
             ViewAssertions.matches(
-                ViewMatchers.hasDescendant(
-                    ViewMatchers.withText(text)
+                hasDescendant(
+                    withText(text)
                 )
             )
         )
 }
 
 fun verifyTextInChild(parentId: Int, text: String) {
-    Espresso.onView(ViewMatchers.withId(parentId))
-        .check(ViewAssertions.matches(ViewMatchers.hasDescendant(ViewMatchers.withText(text))))
+    onView(withId(parentId))
+        .check(ViewAssertions.matches(hasDescendant(withText(text))))
 }
 
 fun verifyTextInView(viewId: Int, text: String) {
-    Espresso.onView(ViewMatchers.withId(viewId))
-        .check(ViewAssertions.matches(ViewMatchers.withText(text)))
+    onView(withId(viewId))
+        .check(ViewAssertions.matches(withText(text)))
 }
 
 fun checkIfViewIsDisplayed(viewId: Int) {
-    Espresso.onView(ViewMatchers.withId(viewId))
-        .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+    onView(withId(viewId))
+        .check(ViewAssertions.matches(isDisplayed()))
+}
+
+fun clickBottomNavigationViewItem(buttonId: Int) {
+    onView(withId(buttonId)).perform(click())
 }

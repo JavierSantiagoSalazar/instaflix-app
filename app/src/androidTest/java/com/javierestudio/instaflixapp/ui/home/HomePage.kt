@@ -50,7 +50,13 @@ class HomePage : Page() {
         return this
     }
 
-    fun verifyActivityToolbarTitle(text: String) {
+    fun verifyActivityToolbarTitle(text: String): HomePage {
         verifyTextInChild(R.id.toolbar, text)
+        return this
+    }
+
+    fun clickNavigationButton(buttonId: Int): HomePage{
+        clickBottomNavigationViewItem(buttonId)
+        return this
     }
 }
