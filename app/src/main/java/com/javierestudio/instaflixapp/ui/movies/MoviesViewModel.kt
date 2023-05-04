@@ -8,19 +8,16 @@ import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.data.toError
-import com.javierestudio.usecases.movie.GetActionMoviesUseCase
-import com.javierestudio.usecases.movie.GetComedyMoviesUseCase
+import com.javierestudio.usecases.movie.GetMoviesByGenreUseCase
 import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
-    getActionMoviesUseCase: GetActionMoviesUseCase,
-    getComedyMoviesUseCase: GetComedyMoviesUseCase,
+    getMoviesByGenreUseCase: GetMoviesByGenreUseCase,
     private val requestMoviesByGenreIdUseCase: RequestMoviesByGenreIdUseCase,
 ) : ViewModel() {
 
@@ -29,12 +26,12 @@ class MoviesViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getActionMoviesUseCase()
+            getMoviesByGenreUseCase(ProgramGenre.ACTION)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { actionMovies -> _state.update { it.copy(actionMovies = actionMovies) } }
         }
         viewModelScope.launch {
-            getComedyMoviesUseCase()
+            getMoviesByGenreUseCase(ProgramGenre.COMEDY)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { comedyMovies -> _state.update { it.copy(comedyMovies = comedyMovies) } }
         }

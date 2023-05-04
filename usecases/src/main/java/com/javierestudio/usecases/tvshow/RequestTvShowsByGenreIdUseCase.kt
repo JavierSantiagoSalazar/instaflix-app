@@ -1,6 +1,5 @@
 package com.javierestudio.usecases.tvshow
 
-import com.javierestudio.data.repository.movie.MoviesRepository
 import com.javierestudio.data.repository.tvshow.TvShowRepository
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.ProgramGenre
@@ -15,6 +14,6 @@ class RequestTvShowsByGenreIdUseCase @Inject constructor(
         genreId: Int,
         programGenre: ProgramGenre,
     ): Error? {
-        return tvShowRepository.requestMovieByGenreId(isRefreshing, genreId, programGenre)
+        return tvShowRepository.requestTvShowByGenreId(isRefreshing, genreId, programGenre)
     }
 }

@@ -26,7 +26,7 @@ class MoviesRepository @Inject constructor(
             localDataSource.deleteMoviesByGenre(ProgramGenre.POPULAR)
             val movies = remoteDataSource.findPopularMovies(regionRepository.findLastRegion())
             movies.fold(ifLeft = { return it }) {
-                localDataSource.save(it, POPULAR_GENRE_ID)
+                localDataSource.save(it, ProgramGenre.POPULAR)
             }
         }
         return null
@@ -37,11 +37,11 @@ class MoviesRepository @Inject constructor(
         genreId: Int,
         programGenre: ProgramGenre,
     ): Error? {
-        if (localDataSource.isMoviesEmptyByGenreId(genreId) || isRefreshing) {
+        if (localDataSource.isMoviesEmptyByGenreId(programGenre) || isRefreshing) {
             localDataSource.deleteMoviesByGenre(programGenre)
             val genreMovies = remoteDataSource.findMoviesByGenre(genreId)
             genreMovies.fold(ifLeft = { return it }) {
-                localDataSource.save(it, genreId)
+                localDataSource.save(it, programGenre)
             }
         }
         return null

@@ -11,10 +11,10 @@ interface TvShowLocalDataSource {
     val dramaTvShows: Flow<List<TvShow>>
 
     suspend fun isEmpty(): Boolean
-    suspend fun isTvShowsEmptyByGenreId(genreId: Int): Boolean
+    suspend fun isTvShowsEmptyByGenreId(programGenre: ProgramGenre): Boolean
 
     fun findById(id: Int): Flow<TvShow>
-    suspend fun save(tvShow: List<TvShow>, genreId: Int): Error?
+    suspend fun save(tvShow: List<TvShow>, programGenre: ProgramGenre): Error?
 
     suspend fun deleteTvShowsByGenre(genre: ProgramGenre): Error?
 }
