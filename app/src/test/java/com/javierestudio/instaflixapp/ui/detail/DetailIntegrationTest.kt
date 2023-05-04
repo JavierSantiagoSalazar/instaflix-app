@@ -3,10 +3,10 @@ package com.javierestudio.instaflixapp.ui.detail
 import app.cash.turbine.test
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.ProgramType
-import com.javierestudio.instaflixapp.common.buildDatabaseMovies
-import com.javierestudio.instaflixapp.common.buildDatabaseTvShows
-import com.javierestudio.instaflixapp.common.buildMovieRepositoryWith
-import com.javierestudio.instaflixapp.common.buildTvShowRepositoryWith
+import com.javierestudio.apptestshared.buildDatabaseMovies
+import com.javierestudio.apptestshared.buildDatabaseTvShows
+import com.javierestudio.apptestshared.buildMovieRepositoryWith
+import com.javierestudio.apptestshared.buildTvShowRepositoryWith
 import com.javierestudio.instaflixapp.data.database.tvshow.TvShow as DatabaseTvShow
 import com.javierestudio.instaflixapp.data.database.movie.Movie as DatabaseMovie
 import com.javierestudio.instaflixapp.data.server.movies.RemoteMovie

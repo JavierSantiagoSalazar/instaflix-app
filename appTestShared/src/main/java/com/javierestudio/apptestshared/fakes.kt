@@ -1,4 +1,4 @@
-package com.javierestudio.instaflixapp.common.fakes
+package com.javierestudio.apptestshared
 
 import com.javierestudio.data.PermissionChecker
 import com.javierestudio.data.datasource.LocationDataSource

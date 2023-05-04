@@ -2,9 +2,9 @@ package com.javierestudio.instaflixapp.ui.movies
 
 import app.cash.turbine.test
 import com.javierestudio.domain.ProgramGenre
-import com.javierestudio.instaflixapp.common.buildDatabaseMovies
-import com.javierestudio.instaflixapp.common.buildMovieRepositoryWith
-import com.javierestudio.instaflixapp.common.buildRemoteMovies
+import com.javierestudio.apptestshared.buildDatabaseMovies
+import com.javierestudio.apptestshared.buildMovieRepositoryWith
+import com.javierestudio.apptestshared.buildRemoteMovies
 import com.javierestudio.instaflixapp.data.database.movie.Movie
 import com.javierestudio.instaflixapp.data.server.movies.RemoteMovie
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule

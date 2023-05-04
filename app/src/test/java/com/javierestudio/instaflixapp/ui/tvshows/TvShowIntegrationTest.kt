@@ -2,9 +2,9 @@ package com.javierestudio.instaflixapp.ui.tvshows
 
 import app.cash.turbine.test
 import com.javierestudio.domain.ProgramGenre
-import com.javierestudio.instaflixapp.common.buildDatabaseTvShows
-import com.javierestudio.instaflixapp.common.buildRemoteTvShows
-import com.javierestudio.instaflixapp.common.buildTvShowRepositoryWith
+import com.javierestudio.apptestshared.buildDatabaseTvShows
+import com.javierestudio.apptestshared.buildRemoteTvShows
+import com.javierestudio.apptestshared.buildTvShowRepositoryWith
 import com.javierestudio.instaflixapp.data.database.tvshow.TvShow
 import com.javierestudio.instaflixapp.data.server.tvshows.RemoteTvShow
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule

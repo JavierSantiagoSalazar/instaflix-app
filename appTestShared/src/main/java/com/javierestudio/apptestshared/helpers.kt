@@ -1,10 +1,9 @@
-package com.javierestudio.instaflixapp.common
+package com.javierestudio.apptestshared
 
 import com.javierestudio.data.RegionRepository
 import com.javierestudio.data.repository.movie.MoviesRepository
 import com.javierestudio.data.repository.tvshow.TvShowRepository
 import com.javierestudio.domain.ProgramGenre
-import com.javierestudio.instaflixapp.common.fakes.*
 import com.javierestudio.instaflixapp.data.database.movie.MovieLocalDataSourceImpl
 import com.javierestudio.instaflixapp.data.database.tvshow.TvShowLocalDataSourceImpl
 import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteDataSourceImpl
@@ -72,7 +71,7 @@ fun buildRemoteMovies(vararg id: Int) = id.map {
     RemoteMovie(
         adult = false,
         backdropPath = "",
-        genreIds = emptyList(),
+        genreIds = listOf(28, 35),
         id = it,
         originalLanguage = "EN",
         originalTitle = "Original Title $it",
