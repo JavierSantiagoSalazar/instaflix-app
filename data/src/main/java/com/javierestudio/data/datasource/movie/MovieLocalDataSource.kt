@@ -11,11 +11,11 @@ interface MovieLocalDataSource {
     val comedyMovies: Flow<List<Movie>>
 
     suspend fun isEmpty(): Boolean
-    suspend fun isMoviesEmptyByGenreId(genreId: Int): Boolean
+    suspend fun isMoviesEmptyByGenreId(programGenre: ProgramGenre): Boolean
 
     fun findById(id: Int): Flow<Movie>
 
-    suspend fun save(movies: List<Movie>, genreId: Int): Error?
+    suspend fun save(movies: List<Movie>, programGenre: ProgramGenre): Error?
 
     suspend fun deleteMoviesByGenre(genre: ProgramGenre): Error?
 }

@@ -8,8 +8,7 @@ import com.javierestudio.domain.Error
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.data.toError
-import com.javierestudio.usecases.tvshow.GetAnimationTvShowsUseCase
-import com.javierestudio.usecases.tvshow.GetDramaTvShowsUseCase
+import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
 import com.javierestudio.usecases.tvshow.RequestTvShowsByGenreIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -18,8 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TvShowsViewModel @Inject constructor(
-    getAnimationTvShowsUseCase: GetAnimationTvShowsUseCase,
-    getDramaTvShowsUseCase: GetDramaTvShowsUseCase,
+    getTvShowByGenreUseCase: GetTvShowByGenreUseCase,
     private val requestTvShowsByGenreIdUseCase: RequestTvShowsByGenreIdUseCase,
 ) : ViewModel() {
 
@@ -28,12 +26,12 @@ class TvShowsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getAnimationTvShowsUseCase()
+            getTvShowByGenreUseCase(ProgramGenre.ANIMATION)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { animationTvShows -> _state.update { it.copy(animationTvShows = animationTvShows) } }
         }
         viewModelScope.launch {
-            getDramaTvShowsUseCase()
+            getTvShowByGenreUseCase(ProgramGenre.DRAMA)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { dramaTvShows -> _state.update { it.copy(dramaTvShows = dramaTvShows) } }
         }

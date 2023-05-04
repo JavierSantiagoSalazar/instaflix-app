@@ -29,14 +29,14 @@ class TvShowLocalDataSourceImpl @Inject constructor(
             .map { it.toDomainModel(ProgramGenre.DRAMA) }
 
     override suspend fun isEmpty(): Boolean = tvShowDao.tvShowCount() == 0
-    override suspend fun isTvShowsEmptyByGenreId(genreId: Int): Boolean =
-        tvShowDao.tvShowCountByProgramGenre(genreId.convertToProgramGenre()) == 0
+    override suspend fun isTvShowsEmptyByGenreId(programGenre: ProgramGenre): Boolean =
+        tvShowDao.tvShowCountByProgramGenre(programGenre) == 0
 
     override fun findById(id: Int): Flow<TvShow> =
         tvShowDao.findById(id).map { it.toDomainModel(it.programGenre) }
 
-    override suspend fun save(tvShow: List<TvShow>, genreId: Int): Error? = tryCall {
-        tvShowDao.insertTvShows(tvShow.fromDomainModel(genreId.convertToProgramGenre()))
+    override suspend fun save(tvShow: List<TvShow>, programGenre: ProgramGenre): Error? = tryCall {
+        tvShowDao.insertTvShows(tvShow.fromDomainModel(programGenre))
     }.fold(
         ifLeft = { it },
         ifRight = { null }

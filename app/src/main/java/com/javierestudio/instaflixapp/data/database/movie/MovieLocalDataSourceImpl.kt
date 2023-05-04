@@ -30,15 +30,15 @@ class MovieLocalDataSourceImpl @Inject constructor(
 
 
     override suspend fun isEmpty(): Boolean = movieDao.movieCount() == 0
-    override suspend fun isMoviesEmptyByGenreId(genreId: Int): Boolean =
-        movieDao.movieCountByProgramGenre(genreId.convertToProgramGenre()) == 0
+    override suspend fun isMoviesEmptyByGenreId(programGenre: ProgramGenre): Boolean =
+        movieDao.movieCountByProgramGenre(programGenre) == 0
 
     override fun findById(id: Int): Flow<Movie> =
         movieDao.findById(id).map { it.toDomainModel(it.programGenre) }
 
-    override suspend fun save(movies: List<Movie>, genreId: Int): Error? =
+    override suspend fun save(movies: List<Movie>, programGenre: ProgramGenre): Error? =
         tryCall {
-            movieDao.insertMovies(movies.fromDomainModel(genreId.convertToProgramGenre()))
+            movieDao.insertMovies(movies.fromDomainModel(programGenre))
         }.fold(
             ifLeft = { it },
             ifRight = { null }

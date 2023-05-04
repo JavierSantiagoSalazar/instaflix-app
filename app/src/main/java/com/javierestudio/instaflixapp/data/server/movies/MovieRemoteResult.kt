@@ -2,7 +2,7 @@ package com.javierestudio.instaflixapp.data.server.movies
 
 import com.google.gson.annotations.SerializedName
 
-data class TopRatedMovieRemoteResult(
+data class MovieRemoteResult(
     val page: Int,
     val results: List<RemoteMovie>,
     @SerializedName("total_pages") val totalPages: Int,

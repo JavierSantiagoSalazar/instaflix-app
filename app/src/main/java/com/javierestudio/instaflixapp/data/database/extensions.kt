@@ -16,13 +16,3 @@ fun Int.convertToProgramGenre(): ProgramGenre {
         else -> ProgramGenre.POPULAR
     }
 }
-
-fun ProgramGenre.convertToGenreId(): Int {
-    return when (this) {
-        ProgramGenre.DRAMA -> DRAMA_GENRE_ID
-        ProgramGenre.ACTION -> ACTION_GENRE_ID
-        ProgramGenre.COMEDY -> COMEDY_GENRE_ID
-        ProgramGenre.ANIMATION -> ANIMATION_GENRE_ID
-        else -> POPULAR_GENRE_ID
-    }
-}

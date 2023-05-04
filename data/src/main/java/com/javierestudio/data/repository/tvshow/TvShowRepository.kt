@@ -1,6 +1,5 @@
 package com.javierestudio.data.repository.tvshow
 
-import com.javierestudio.data.common.Constants.POPULAR_GENRE_ID
 import com.javierestudio.data.datasource.thshow.TvShowLocalDataSource
 import com.javierestudio.data.datasource.thshow.TvShowRemoteDataSource
 import com.javierestudio.domain.Error
@@ -24,22 +23,22 @@ class TvShowRepository @Inject constructor(
             localDataSource.deleteTvShowsByGenre(ProgramGenre.POPULAR)
             val tvShows = remoteDataSource.findPopularTvShows()
             tvShows.fold(ifLeft = { return it }) {
-                localDataSource.save(it, POPULAR_GENRE_ID)
+                localDataSource.save(it, ProgramGenre.POPULAR)
             }
         }
         return null
     }
 
-    suspend fun requestMovieByGenreId(
+    suspend fun requestTvShowByGenreId(
         isRefreshing: Boolean,
         genreId: Int,
         programGenre: ProgramGenre,
     ): Error? {
-        if (localDataSource.isTvShowsEmptyByGenreId(genreId) || isRefreshing) {
+        if (localDataSource.isTvShowsEmptyByGenreId(programGenre) || isRefreshing) {
             localDataSource.deleteTvShowsByGenre(programGenre)
             val genreMovies = remoteDataSource.findTvShowsByGenre(genreId)
             genreMovies.fold(ifLeft = { return it }) {
-                localDataSource.save(it, genreId)
+                localDataSource.save(it, programGenre)
             }
         }
         return null

@@ -4,21 +4,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.data.toError
-import com.javierestudio.usecases.movie.GetPopularMoviesUseCase
+import com.javierestudio.usecases.movie.GetMoviesByGenreUseCase
+import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
 import com.javierestudio.usecases.movie.RequestPopularMoviesUseCase
-import com.javierestudio.usecases.tvshow.GetPopularTvShowsUseCase
+import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
 import com.javierestudio.usecases.tvshow.RequestPopularTvShowsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    getPopularMoviesUseCase: GetPopularMoviesUseCase,
-    getPopularTvShowsUseCase: GetPopularTvShowsUseCase,
+    getMoviesByGenreUseCase: GetMoviesByGenreUseCase,
+    getTvShowByGenreUseCase: GetTvShowByGenreUseCase,
     private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase,
     private val requestPopularTvShowsUseCase: RequestPopularTvShowsUseCase,
 ) : ViewModel() {
@@ -28,12 +32,12 @@ class HomeViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            getPopularMoviesUseCase()
+            getMoviesByGenreUseCase(ProgramGenre.POPULAR)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { movies -> _state.update { it.copy(movies = movies) } }
         }
         viewModelScope.launch {
-            getPopularTvShowsUseCase()
+            getTvShowByGenreUseCase(ProgramGenre.POPULAR)
                 .catch { cause -> _state.update { it.copy(error = cause.toError()) } }
                 .collect { tvShows -> _state.update { it.copy(tvShows = tvShows) } }
         }
