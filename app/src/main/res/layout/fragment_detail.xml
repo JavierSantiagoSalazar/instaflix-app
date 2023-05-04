@@ -219,7 +219,7 @@
 
                 <TextView
                     android:layout_marginStart="3dp"
-                    android:id="@+id/progra_vote_count"
+                    android:id="@+id/programVoteCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -248,7 +248,7 @@
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/program_vote_average"
+                    android:id="@+id/programVoteAverage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"

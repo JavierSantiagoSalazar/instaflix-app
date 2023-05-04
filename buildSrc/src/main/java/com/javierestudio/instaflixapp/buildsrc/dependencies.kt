@@ -8,6 +8,7 @@ object Libs {
     object Kotlin {
         private const val version = "1.6.10"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
 
         object Coroutines {
             private const val version = "1.6.4"
@@ -51,13 +52,17 @@ object Libs {
         }
 
         object Test {
+            private const val version = "1.4.0"
+            const val runner = "androidx.test:runner:$version"
+            const val rules = "androidx.test:rules:$version"
 
             object Ext {
-                private const val version = "1.1.4"
+                private const val version = "1.1.3"
                 const val junit = "androidx.test.ext:junit-ktx:$version"
             }
+
             object Espresso{
-                private const val version="3.5.0"
+                private const val version="3.4.0"
                 const val contrib = "androidx.test.espresso:espresso-contrib:$version"
             }
         }
@@ -85,6 +90,7 @@ object Libs {
         const val android = "com.google.dagger:hilt-android:$version"
         const val compiler = "com.google.dagger:hilt-compiler:$version"
         const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        const val test = "com.google.dagger:hilt-android-testing:$version"
     }
 
     object Arrow {

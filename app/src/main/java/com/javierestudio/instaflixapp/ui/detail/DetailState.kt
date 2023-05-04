@@ -28,7 +28,7 @@ class DetailState(private val activity: Activity) {
             programTitle.text = movie.title
             programDetailToolbar.title = movie.originalTitle
             programDetailSummary.text = movie.overview
-            prograVoteCount.text = movie.popularity.format()
+            programVoteCount.text = movie.popularity.format()
             programVoteAverage.text = movie.voteAverage.toString()
             programDetailImage.loadUrl("https://image.tmdb.org/t/p/w185/${movie.backdropPath}")
         }
@@ -40,7 +40,7 @@ class DetailState(private val activity: Activity) {
             programTitle.text = tvShow.name
             programDetailToolbar.title = tvShow.originalName
             programDetailSummary.text = tvShow.overview
-            prograVoteCount.text = tvShow.popularity.format()
+            programVoteCount.text = tvShow.popularity.format()
             programVoteAverage.text = tvShow.voteAverage.toString()
             programDetailImage.loadUrl("https://image.tmdb.org/t/p/w185/${tvShow.backdropPath}")
         }

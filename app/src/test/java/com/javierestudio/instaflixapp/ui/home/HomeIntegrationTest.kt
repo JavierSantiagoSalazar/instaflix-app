@@ -1,8 +1,8 @@
 package com.javierestudio.instaflixapp.ui.home
 
 import app.cash.turbine.test
+import com.javierestudio.apptestshared.*
 import com.javierestudio.domain.ProgramGenre
-import com.javierestudio.instaflixapp.common.*
 import com.javierestudio.instaflixapp.data.server.movies.RemoteMovie
 import com.javierestudio.instaflixapp.data.server.tvshows.RemoteTvShow
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
