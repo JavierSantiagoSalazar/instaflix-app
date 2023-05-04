@@ -8,11 +8,11 @@ interface TvShowRemoteService {
     @GET("discover/tv?sort_by=popularity.desc")
     suspend fun listPopularTvShows(
         @Query("api_key") apiKey: String,
-    ): TopRatedTvShowsRemoteResult
+    ): TvShowsRemoteResult
 
     @GET("discover/tv?sort_by=popularity.desc")
     suspend fun listTvShowsByGenre(
         @Query("api_key") apiKey: String,
         @Query("with_genres") genre: Int
-    ): TopRatedTvShowsRemoteResult
+    ): TvShowsRemoteResult
 }
