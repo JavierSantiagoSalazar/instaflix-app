@@ -47,6 +47,11 @@ But for the case of android development I use this more abstracted and suitable 
 - UI tests were made with Espresso and Hilt, the UI tests do not consume network services, all the services are mocked.
 - Page Object Pattern was implemented to UI tests so, the UI test are easier to read, and the implementation is encapsulated in the Pages.
 
+## CI/CD
+
+The Github Repository has one pipeline with Github Actions that checks the unit test, is executed when a PR is raised
+pointing to main branch and when a merge is done to main branch
+
 ## TO IMPROVE
 
 - Use a parent class Program in order to maintain inheritance between the similar properties of Movies and TvShow.
