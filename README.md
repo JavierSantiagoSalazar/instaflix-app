@@ -80,5 +80,6 @@ pointing to main branch and when a merge is done to main branch
 ## Requirements
 
 - [x] Minimum version: Android 7 - API level 24
+- [x] JAVA 11 in project estructure
 
 ### Made by Javier Santiago Salazar - javier452011@hotmail.es - www.linkedin.com/in/javier-santiago-salazar/
