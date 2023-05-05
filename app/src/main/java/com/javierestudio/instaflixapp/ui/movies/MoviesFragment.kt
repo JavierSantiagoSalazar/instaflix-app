@@ -43,8 +43,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
             diff(this, { it.comedyMovies }) { comedyMoviesAdapter.submitList(it) }
             launchAndCollect(this) {
                 it.error?.let { error ->
-                    view.showErrorSnackBar(error) {
-                        viewModel.getPrograms()
+                    if (view.isShown) {
+                        view.showErrorSnackBar(error) {
+                            viewModel.getPrograms()
+                        }
                     }
                 }
             }

@@ -42,8 +42,10 @@ class TvShowsFragment : Fragment(R.layout.fragment_tv_show) {
             diff(this, { it.dramaTvShows }) { dramaTvShowsAdapter.submitList(it) }
             launchAndCollect(this) {
                 it.error?.let { error ->
-                    view.showErrorSnackBar(error) {
-                        viewModel.getPrograms()
+                    if (view.isShown) {
+                        view.showErrorSnackBar(error) {
+                            viewModel.getPrograms()
+                        }
                     }
                 }
             }
