@@ -7,22 +7,21 @@ import com.javierestudio.domain.Movie
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.data.toError
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.usecases.movie.GetMoviesByGenreUseCase
-import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
 import com.javierestudio.usecases.movie.RequestPopularMoviesUseCase
 import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
 import com.javierestudio.usecases.tvshow.RequestPopularTvShowsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     getMoviesByGenreUseCase: GetMoviesByGenreUseCase,
     getTvShowByGenreUseCase: GetTvShowByGenreUseCase,
+    private val networkHelper: NetworkHelper,
     private val requestPopularMoviesUseCase: RequestPopularMoviesUseCase,
     private val requestPopularTvShowsUseCase: RequestPopularTvShowsUseCase,
 ) : ViewModel() {
@@ -50,6 +49,16 @@ class HomeViewModel @Inject constructor(
             val tvShowsError = requestPopularTvShowsUseCase(isRefreshing)
             _state.value = _state.value.copy(loading = false, error = moviesError)
             _state.value = _state.value.copy(loading = false, error = tvShowsError)
+        }
+    }
+
+    fun checkInternetConnection(action:() -> Unit) {
+        viewModelScope.launch {
+            if (!networkHelper.isInternetAvailable()) {
+                _state.value = state.value.copy(error = Error.Connectivity)
+            } else {
+                action()
+            }
         }
     }
 

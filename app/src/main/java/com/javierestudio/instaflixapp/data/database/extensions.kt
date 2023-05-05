@@ -4,7 +4,6 @@ import com.javierestudio.data.common.Constants.ACTION_GENRE_ID
 import com.javierestudio.data.common.Constants.ANIMATION_GENRE_ID
 import com.javierestudio.data.common.Constants.COMEDY_GENRE_ID
 import com.javierestudio.data.common.Constants.DRAMA_GENRE_ID
-import com.javierestudio.data.common.Constants.POPULAR_GENRE_ID
 import com.javierestudio.domain.ProgramGenre
 
 fun Int.convertToProgramGenre(): ProgramGenre {

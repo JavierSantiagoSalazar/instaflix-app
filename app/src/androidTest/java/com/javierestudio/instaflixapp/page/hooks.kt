@@ -6,8 +6,6 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
-import com.javierestudio.instaflixapp.R
-import org.hamcrest.CoreMatchers.allOf
 
 fun clickInRecyclerItem(recyclerId: Int, itemPosition: Int) {
     onView(withId(recyclerId))

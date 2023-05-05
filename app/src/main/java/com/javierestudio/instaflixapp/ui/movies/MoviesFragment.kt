@@ -25,7 +25,10 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
             recyclerActionMovies.adapter = actionMoviesAdapter
             recyclerComedyMovies.adapter = comedyMoviesAdapter
             swipeRefresh.setOnRefreshListener {
-                viewModel.getPrograms(true)
+                viewModel.checkInternetConnection{
+                    viewModel.getPrograms(true)
+                    swipeRefresh.isRefreshing = false
+                }
                 swipeRefresh.isRefreshing = false
             }
         }

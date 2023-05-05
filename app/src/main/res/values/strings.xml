@@ -1,6 +1,6 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!--Global-->
-    <string name="app_name">InstaFlixApp</string>
+    <string name="app_name">InstaFlix</string>
     <string name="snack_bar_dismiss_message">Dismiss</string>
     <string name="snack_bar_functionality">Functionality on the way</string>
 

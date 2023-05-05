@@ -1,10 +1,11 @@
 package com.javierestudio.instaflixapp.ui.movies
 
 import app.cash.turbine.test
-import com.javierestudio.domain.ProgramGenre
+import com.javierestudio.apptestshared.FakeNetworkHelper
 import com.javierestudio.apptestshared.buildDatabaseMovies
 import com.javierestudio.apptestshared.buildMovieRepositoryWith
 import com.javierestudio.apptestshared.buildRemoteMovies
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.data.database.movie.Movie
 import com.javierestudio.instaflixapp.data.server.movies.RemoteMovie
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
@@ -83,6 +84,7 @@ class MovieIntegrationTest {
         val moviesRepository = buildMovieRepositoryWith(moviesLocalData, moviesRemoteData)
         val getMoviesByGenreUseCase = GetMoviesByGenreUseCase(moviesRepository)
         val requestPopularMoviesUseCase = RequestMoviesByGenreIdUseCase(moviesRepository)
-        return MoviesViewModel(getMoviesByGenreUseCase, requestPopularMoviesUseCase)
+        val networkHelper = FakeNetworkHelper(true)
+        return MoviesViewModel(getMoviesByGenreUseCase, networkHelper, requestPopularMoviesUseCase)
     }
 }

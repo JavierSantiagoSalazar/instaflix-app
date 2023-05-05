@@ -2,10 +2,9 @@ package com.javierestudio.instaflixapp.data.database.tvshow
 
 import com.javierestudio.data.datasource.thshow.TvShowLocalDataSource
 import com.javierestudio.domain.Error
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.ProgramType
 import com.javierestudio.domain.TvShow
-import com.javierestudio.domain.ProgramGenre
-import com.javierestudio.instaflixapp.data.database.convertToProgramGenre
 import com.javierestudio.instaflixapp.data.tryCall
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map

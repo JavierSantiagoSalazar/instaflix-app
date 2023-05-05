@@ -25,7 +25,10 @@ class TvShowsFragment : Fragment(R.layout.fragment_tv_show) {
             recyclerAnimationTvShow.adapter = animationTvShowsAdapter
             recyclerDramaTvShow.adapter = dramaTvShowsAdapter
             swipeRefresh.setOnRefreshListener {
-                viewModel.getPrograms(true)
+                viewModel.checkInternetConnection{
+                    viewModel.getPrograms(true)
+                    swipeRefresh.isRefreshing = false
+                }
                 swipeRefresh.isRefreshing = false
             }
         }

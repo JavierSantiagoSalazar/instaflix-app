@@ -4,20 +4,16 @@ import app.cash.turbine.test
 import com.javierestudio.data.common.Constants
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
-import com.javierestudio.instaflixapp.ui.home.HomeViewModel
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.instaflixapp.ui.movies.MoviesViewModel.UiState
 import com.javierestudio.testshared.sampleMovie
-import com.javierestudio.testshared.sampleTvShow
 import com.javierestudio.usecases.movie.GetMoviesByGenreUseCase
 import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
-import com.javierestudio.usecases.movie.RequestPopularMoviesUseCase
-import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
-import com.javierestudio.usecases.tvshow.RequestPopularTvShowsUseCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -40,6 +36,9 @@ class MoviesViewModelTest {
     @Mock
     lateinit var requestMoviesByGenreIdUseCase: RequestMoviesByGenreIdUseCase
 
+    @Mock
+    lateinit var networkHelper: NetworkHelper
+
     private lateinit var vm: MoviesViewModel
 
     private val actionMovies = listOf(sampleMovie.copy(id = 1, programGenre = ProgramGenre.ACTION))
@@ -51,6 +50,7 @@ class MoviesViewModelTest {
         whenever(getMoviesByGenreUseCase(ProgramGenre.COMEDY)).thenReturn(flowOf(comedyMovies))
         vm = MoviesViewModel(
             getMoviesByGenreUseCase,
+            networkHelper,
             requestMoviesByGenreIdUseCase
         )
     }

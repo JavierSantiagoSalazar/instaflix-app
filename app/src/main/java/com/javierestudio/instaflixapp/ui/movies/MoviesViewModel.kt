@@ -8,6 +8,7 @@ import com.javierestudio.domain.Error
 import com.javierestudio.domain.Movie
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.data.toError
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.usecases.movie.GetMoviesByGenreUseCase
 import com.javierestudio.usecases.movie.RequestMoviesByGenreIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     getMoviesByGenreUseCase: GetMoviesByGenreUseCase,
+    private val networkHelper: NetworkHelper,
     private val requestMoviesByGenreIdUseCase: RequestMoviesByGenreIdUseCase,
 ) : ViewModel() {
 
@@ -55,10 +57,20 @@ class MoviesViewModel @Inject constructor(
         }
     }
 
+    fun checkInternetConnection(action: () -> Unit) {
+        viewModelScope.launch {
+            if (!networkHelper.isInternetAvailable()) {
+                _state.value = state.value.copy(error = Error.Connectivity)
+            } else {
+                action()
+            }
+        }
+    }
+
     data class UiState(
         val loading: Boolean = false,
         val actionMovies: List<Movie>? = null,
         val comedyMovies: List<Movie>? = null,
-        val error: Error? = null
+        val error: Error? = null,
     )
 }

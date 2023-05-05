@@ -1,10 +1,11 @@
 package com.javierestudio.instaflixapp.ui.tvshows
 
 import app.cash.turbine.test
-import com.javierestudio.domain.ProgramGenre
+import com.javierestudio.apptestshared.FakeNetworkHelper
 import com.javierestudio.apptestshared.buildDatabaseTvShows
 import com.javierestudio.apptestshared.buildRemoteTvShows
 import com.javierestudio.apptestshared.buildTvShowRepositoryWith
+import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.data.database.tvshow.TvShow
 import com.javierestudio.instaflixapp.data.server.tvshows.RemoteTvShow
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
@@ -61,7 +62,7 @@ class TvShowIntegrationTest {
 
         val vm = buildViewModelWith(
             tvShowLocalData = localTvShowData,
-            tvShowRemoteData = remoteTvShowData
+            tvShowRemoteData = remoteTvShowData,
         )
 
         vm.state.test {
@@ -83,6 +84,7 @@ class TvShowIntegrationTest {
         val tvShowRepository = buildTvShowRepositoryWith(tvShowLocalData, tvShowRemoteData)
         val getMoviesByGenreUseCase = GetTvShowByGenreUseCase(tvShowRepository)
         val requestPopularMoviesUseCase = RequestTvShowsByGenreIdUseCase(tvShowRepository)
-        return TvShowsViewModel(getMoviesByGenreUseCase, requestPopularMoviesUseCase)
+        val networkHelper = FakeNetworkHelper(true)
+        return TvShowsViewModel(getMoviesByGenreUseCase, requestPopularMoviesUseCase, networkHelper)
     }
 }

@@ -25,7 +25,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             recyclerMovies.adapter = moviesAdapter
             recyclerSeries.adapter = tvShowsAdapter
             swipeRefresh.setOnRefreshListener {
-                viewModel.getPrograms(true)
+                viewModel.checkInternetConnection{
+                    viewModel.getPrograms(true)
+                    swipeRefresh.isRefreshing = false
+                }
                 swipeRefresh.isRefreshing = false
             }
         }

@@ -8,6 +8,7 @@ import com.javierestudio.domain.Error
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.domain.TvShow
 import com.javierestudio.instaflixapp.data.toError
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
 import com.javierestudio.usecases.tvshow.RequestTvShowsByGenreIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,6 +20,7 @@ import javax.inject.Inject
 class TvShowsViewModel @Inject constructor(
     getTvShowByGenreUseCase: GetTvShowByGenreUseCase,
     private val requestTvShowsByGenreIdUseCase: RequestTvShowsByGenreIdUseCase,
+    private val networkHelper: NetworkHelper,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(UiState())
@@ -52,6 +54,16 @@ class TvShowsViewModel @Inject constructor(
             )
             _state.value = _state.value.copy(loading = false, error = animationTvShowsError)
             _state.value = _state.value.copy(loading = false, error = dramaTvShowsError)
+        }
+    }
+
+    fun checkInternetConnection(action: () -> Unit) {
+        viewModelScope.launch {
+            if (!networkHelper.isInternetAvailable()) {
+                _state.value = state.value.copy(error = Error.Connectivity)
+            } else {
+                action()
+            }
         }
     }
 

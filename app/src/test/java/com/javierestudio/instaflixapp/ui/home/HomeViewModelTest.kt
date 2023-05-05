@@ -3,6 +3,7 @@ package com.javierestudio.instaflixapp.ui.home
 import app.cash.turbine.test
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.instaflixapp.ui.home.HomeViewModel.UiState
 import com.javierestudio.testshared.sampleMovie
 import com.javierestudio.testshared.sampleTvShow
@@ -43,6 +44,9 @@ class HomeViewModelTest {
     @Mock
     lateinit var requestPopularTvShowsUseCase: RequestPopularTvShowsUseCase
 
+    @Mock
+    lateinit var networkHelper: NetworkHelper
+
     private lateinit var vm: HomeViewModel
 
     private val movies = listOf(sampleMovie.copy(id = 1, programGenre = ProgramGenre.POPULAR))
@@ -55,6 +59,7 @@ class HomeViewModelTest {
         vm = HomeViewModel(
             getMoviesByGenreUseCase,
             getTvShowByGenreUseCase,
+            networkHelper,
             requestPopularMoviesUseCase,
             requestPopularTvShowsUseCase
         )

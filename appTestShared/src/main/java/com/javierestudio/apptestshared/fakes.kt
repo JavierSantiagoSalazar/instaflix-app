@@ -11,6 +11,7 @@ import com.javierestudio.instaflixapp.data.server.movies.MovieRemoteResult
 import com.javierestudio.instaflixapp.data.server.tvshows.RemoteTvShow
 import com.javierestudio.instaflixapp.data.server.tvshows.TvShowsRemoteResult
 import com.javierestudio.instaflixapp.data.server.tvshows.TvShowRemoteService
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
@@ -42,7 +43,7 @@ class FakeMovieDao(movies: List<DatabaseMovie> = emptyList()) : MovieDao {
         inMemoryMovies.value = movies
 
         if (::findMovieFlow.isInitialized) {
-            movies.firstOrNull() { it.id == findMovieFlow.value.id }
+            movies.firstOrNull { it.id == findMovieFlow.value.id }
                 ?.let { findMovieFlow.value = it }
         }
 
@@ -78,7 +79,7 @@ class FakeTvShowDao(tvShows: List<DatabaseTvShow> = emptyList()) : TvShowDao {
         inMemoryTvShows.value = tvShows
 
         if (::findTvShowFlow.isInitialized) {
-            tvShows.firstOrNull() { it.id == findTvShowFlow.value.id }
+            tvShows.firstOrNull { it.id == findTvShowFlow.value.id }
                 ?.let { findTvShowFlow.value = it }
         }
     }
@@ -133,13 +134,19 @@ class FakeTvShowRemoteService(private val tvShows: List<RemoteTvShow> = emptyLis
 }
 
 class FakeLocationDataSource : LocationDataSource {
-    var location = "US"
+    private var location = "US"
 
     override suspend fun findLastRegion(): String = location
 }
 
 class FakePermissionChecker : PermissionChecker {
-    var permissionGranted = true
+    private var permissionGranted = true
 
     override fun check(permission: PermissionChecker.Permission) = permissionGranted
+}
+
+class FakeNetworkHelper(private val isInternetAvailable: Boolean) : NetworkHelper {
+    override fun isInternetAvailable(): Boolean {
+        return isInternetAvailable
+    }
 }

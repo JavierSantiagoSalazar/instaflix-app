@@ -4,6 +4,7 @@ import app.cash.turbine.test
 import com.javierestudio.data.common.Constants
 import com.javierestudio.domain.ProgramGenre
 import com.javierestudio.instaflixapp.testrules.CoroutinesTestRule
+import com.javierestudio.instaflixapp.ui.common.networkhelper.NetworkHelper
 import com.javierestudio.instaflixapp.ui.tvshows.TvShowsViewModel.UiState
 import com.javierestudio.testshared.sampleTvShow
 import com.javierestudio.usecases.tvshow.GetTvShowByGenreUseCase
@@ -35,6 +36,9 @@ class TvShowsViewModelTest {
     @Mock
     lateinit var requestTvShowsByGenreIdUseCase: RequestTvShowsByGenreIdUseCase
 
+    @Mock
+    lateinit var networkHelper: NetworkHelper
+
     private lateinit var vm: TvShowsViewModel
 
     private val animationTvShows =
@@ -47,7 +51,8 @@ class TvShowsViewModelTest {
         whenever(getTvShowByGenreUseCase(ProgramGenre.DRAMA)).thenReturn(flowOf(dramaTvShows))
         vm = TvShowsViewModel(
             getTvShowByGenreUseCase,
-            requestTvShowsByGenreIdUseCase
+            requestTvShowsByGenreIdUseCase,
+            networkHelper
         )
     }
 

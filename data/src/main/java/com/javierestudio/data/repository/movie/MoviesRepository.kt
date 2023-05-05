@@ -1,7 +1,6 @@
 package com.javierestudio.data.repository.movie
 
 import com.javierestudio.data.RegionRepository
-import com.javierestudio.data.common.Constants.POPULAR_GENRE_ID
 import com.javierestudio.data.datasource.movie.MovieLocalDataSource
 import com.javierestudio.data.datasource.movie.MovieRemoteDataSource
 import com.javierestudio.domain.Error
