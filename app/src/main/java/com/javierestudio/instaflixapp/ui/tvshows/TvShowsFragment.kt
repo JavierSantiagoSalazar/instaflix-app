@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.FragmentTvShowBinding
-import com.javierestudio.instaflixapp.ui.common.launchAndCollect
-import com.javierestudio.instaflixapp.ui.common.setVisibleOrGone
-import com.javierestudio.instaflixapp.ui.common.showErrorSnackBar
-import com.javierestudio.instaflixapp.ui.common.TvShowsAdapter
+import com.javierestudio.instaflixapp.ui.common.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,13 +31,17 @@ class TvShowsFragment : Fragment(R.layout.fragment_tv_show) {
         }
         tvShowState = buildTvShowsFragment().apply { setToolbarTitle() }
 
-        viewLifecycleOwner.launchAndCollect(viewModel.state) {
-            binding.progress.setVisibleOrGone(it.loading)
-            animationTvShowsAdapter.submitList(it.animationTvShows)
-            dramaTvShowsAdapter.submitList(it.dramaTvShows)
-            it.error?.let { error ->
-                view.showErrorSnackBar(error) {
-                    viewModel.getPrograms()
+        with(viewModel.state) {
+            diff(this, { it.loading }) {
+                it.let { binding.progress.setVisibleOrGone(it) }
+            }
+            diff(this, { it.animationTvShows }) { animationTvShowsAdapter.submitList(it) }
+            diff(this, { it.dramaTvShows }) { dramaTvShowsAdapter.submitList(it) }
+            launchAndCollect(this) {
+                it.error?.let { error ->
+                    view.showErrorSnackBar(error) {
+                        viewModel.getPrograms()
+                    }
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.javierestudio.domain.Error
 import com.javierestudio.instaflixapp.R
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 
@@ -99,3 +102,9 @@ fun View.showErrorSnackBar(error: Error, action: () -> Unit){
 
 fun Double.format(): String = DecimalFormat("#,##0").format(this)
 
+fun <T, U> Fragment.diff(flow: Flow<T>, mapFun: (T) -> U, body: (U) -> Unit) {
+    viewLifecycleOwner.launchAndCollect(
+        flow = flow.map(mapFun).distinctUntilChanged(),
+        body = body
+    )
+}

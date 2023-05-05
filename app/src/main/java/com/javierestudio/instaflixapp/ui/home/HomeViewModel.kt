@@ -57,6 +57,6 @@ class HomeViewModel @Inject constructor(
         val loading: Boolean = false,
         val movies: List<Movie>? = null,
         val tvShows: List<TvShow>? = null,
-        val error: Error? = null
+        val error: Error? = null,
     )
 }
