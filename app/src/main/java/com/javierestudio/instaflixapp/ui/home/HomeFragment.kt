@@ -32,13 +32,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         homeState = buildHomeState().apply { setToolbarTitle() }
 
-        viewLifecycleOwner.launchAndCollect(viewModel.state) {
-            binding.progress.setVisibleOrGone(it.loading)
-            moviesAdapter.submitList(it.movies)
-            tvShowsAdapter.submitList(it.tvShows)
-            it.error?.let { error ->
-                view.showErrorSnackBar(error) {
-                    viewModel.getPrograms()
+        with(viewModel.state) {
+            diff(this, { it.loading }) {
+                it.let { binding.progress.setVisibleOrGone(it) }
+            }
+            diff(this, { it.movies }) { moviesAdapter.submitList(it) }
+            diff(this, { it.tvShows }) { tvShowsAdapter.submitList(it) }
+            launchAndCollect(this) {
+                it.error?.let { error ->
+                    view.showErrorSnackBar(error) {
+                        viewModel.getPrograms()
+                    }
                 }
             }
         }

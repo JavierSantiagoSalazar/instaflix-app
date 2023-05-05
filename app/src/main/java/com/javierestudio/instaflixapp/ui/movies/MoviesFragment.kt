@@ -6,10 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.javierestudio.instaflixapp.R
 import com.javierestudio.instaflixapp.databinding.FragmentMovieBinding
-import com.javierestudio.instaflixapp.ui.common.launchAndCollect
-import com.javierestudio.instaflixapp.ui.common.setVisibleOrGone
-import com.javierestudio.instaflixapp.ui.common.showErrorSnackBar
-import com.javierestudio.instaflixapp.ui.common.MoviesAdapter
+import com.javierestudio.instaflixapp.ui.common.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,13 +32,17 @@ class MoviesFragment : Fragment(R.layout.fragment_movie) {
 
         movieState = buildMoviesState().apply { setToolbarTitle() }
 
-        viewLifecycleOwner.launchAndCollect(viewModel.state) {
-            binding.progress.setVisibleOrGone(it.loading)
-            actionMoviesAdapter.submitList(it.actionMovies)
-            comedyMoviesAdapter.submitList(it.comedyMovies)
-            it.error?.let { error ->
-                view.showErrorSnackBar(error) {
-                    viewModel.getPrograms()
+        with(viewModel.state) {
+            diff(this, { it.loading }) {
+                it.let { binding.progress.setVisibleOrGone(it) }
+            }
+            diff(this, { it.actionMovies }) { actionMoviesAdapter.submitList(it) }
+            diff(this, { it.comedyMovies }) { comedyMoviesAdapter.submitList(it) }
+            launchAndCollect(this) {
+                it.error?.let { error ->
+                    view.showErrorSnackBar(error) {
+                        viewModel.getPrograms()
+                    }
                 }
             }
         }
