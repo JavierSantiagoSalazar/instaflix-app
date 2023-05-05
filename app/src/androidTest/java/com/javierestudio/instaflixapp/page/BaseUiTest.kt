@@ -9,7 +9,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 open class BaseUiTest {
 
     @get:Rule(order = 0)
