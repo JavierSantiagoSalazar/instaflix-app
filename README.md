@@ -19,11 +19,11 @@ The app has the following modules:
 
 ## Clean Arch Layers: 
 
-"FULL ARCH IMAGE"
+![Full CleanArchitecture](https://user-images.githubusercontent.com/100961042/236562750-18dc2622-89c4-439f-87f0-ccb7c65fe221.png)
 
 But for the case of android development I use this more abstracted and suitable form for development
 
-"NEW ARCH IMAGE"
+![Fluend Clean](https://user-images.githubusercontent.com/100961042/236562816-881dc805-a1ed-4253-83a3-b3a835810e82.png)
 
 - [x] Presentation/Framework: A layer that interacts with the UI.
 - [x] UseCases: All app interactors. 
@@ -49,7 +49,7 @@ But for the case of android development I use this more abstracted and suitable 
 
 ## TO IMPROVE
 
-- Use a parent class program in order to maintain inheritance between the similar properties of Movies and TvShow.
+- Use a parent class Program in order to maintain inheritance between the similar properties of Movies and TvShow.
 - Improve the way categories are handled within the application.
 - Migrate to Jetpack Compose.
 - Improve the way to obtain the categories in order to make the application more reactive to the user, generating more possibilities to obtain many more categories.
