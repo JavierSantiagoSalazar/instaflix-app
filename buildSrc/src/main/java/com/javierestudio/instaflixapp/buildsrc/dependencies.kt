@@ -116,5 +116,4 @@ object Libs {
     }
 
     const val turbine = "app.cash.turbine:turbine:0.12.3"
-
 }

@@ -31,7 +31,7 @@ class HomeIntegrationTest {
         val remoteTvShowsData = buildRemoteTvShows(4, 5, 6)
         val vm = buildViewModelWith(
             moviesRemoteData = remoteMoviesData,
-            tvShowRemoteData = remoteTvShowsData
+            tvShowRemoteData = remoteTvShowsData,
         )
 
         vm.getPrograms(false)
@@ -66,12 +66,11 @@ class HomeIntegrationTest {
         val remoteMoviesData = buildRemoteMovies(4, 5, 6)
         val localTvShowsData = buildDatabaseTvShows(1, 2, 3, genre = ProgramGenre.POPULAR)
         val remoteTvShowsData = buildRemoteTvShows(4, 5, 6)
-
         val vm = buildViewModelWith(
             moviesRemoteData = remoteMoviesData,
             tvShowRemoteData = remoteTvShowsData,
             moviesLocalData = localMoviesData,
-            tvShowLocalData = localTvShowsData
+            tvShowLocalData = localTvShowsData,
         )
 
         vm.state.test {
@@ -103,11 +102,13 @@ class HomeIntegrationTest {
         val getTvShowByGenreUseCase = GetTvShowByGenreUseCase(tvShowRepository)
         val requestPopularMoviesUseCase = RequestPopularMoviesUseCase(moviesRepository)
         val requestPopularTvShowsUseCase = RequestPopularTvShowsUseCase(tvShowRepository)
+        val networkHelper = FakeNetworkHelper(true)
         return HomeViewModel(
-            getMoviesByGenreUseCase,
-            getTvShowByGenreUseCase,
-            requestPopularMoviesUseCase,
-            requestPopularTvShowsUseCase
+            getMoviesByGenreUseCase = getMoviesByGenreUseCase,
+            getTvShowByGenreUseCase = getTvShowByGenreUseCase,
+            networkHelper = networkHelper,
+            requestPopularMoviesUseCase = requestPopularMoviesUseCase,
+            requestPopularTvShowsUseCase = requestPopularTvShowsUseCase,
         )
     }
 }

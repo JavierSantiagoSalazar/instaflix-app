@@ -64,7 +64,7 @@ fun View.showSnackBar(
     }
 }
 
-fun View.showSnackBarFunctionality(duration: Int = Snackbar.LENGTH_SHORT, ) {
+fun View.showSnackBarFunctionality(duration: Int = Snackbar.LENGTH_SHORT) {
     Snackbar.make(this, context.getString(R.string.snack_bar_functionality), duration).show()
 }
 

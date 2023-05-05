@@ -130,5 +130,4 @@ class MoviesRepositoryTest {
 
         assertEquals(movie, result)
     }
-
 }

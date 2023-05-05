@@ -16,5 +16,4 @@ interface MovieRemoteService {
         @Query("api_key") apiKey: String,
         @Query("with_genres") genre: Int
     ): MovieRemoteResult
-
 }
