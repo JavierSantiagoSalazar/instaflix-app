@@ -3,12 +3,14 @@ package com.javierestudio.instaflixapp.buildsrc
 object Libs {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:7.3.1"
+    const val gradleVersionsPlugin = "com.github.ben-manes:gradle-versions-plugin:0.46.0"
     const val playServicesLocation = "com.google.android.gms:play-services-location:21.0.1"
 
     object Kotlin {
         private const val version = "1.6.10"
+
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
-        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:$version"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:1.8.21"
 
         object Coroutines {
             private const val version = "1.6.4"
@@ -19,20 +21,20 @@ object Libs {
 
     object AndroidX {
 
-        const val coreKtx = "androidx.core:core-ktx:1.9.0"
-        const val appCompat = "androidx.appcompat:appcompat:1.5.1"
-        const val recyclerView = "androidx.recyclerview:recyclerview:1.2.1"
+        const val coreKtx = "androidx.core:core-ktx:1.10.0"
+        const val appCompat = "androidx.appcompat:appcompat:1.6.1"
+        const val recyclerView = "androidx.recyclerview:recyclerview:1.3.0"
         const val swipeRefresh = "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-        const val material = "com.google.android.material:material:1.7.0"
+        const val material = "com.google.android.material:material:1.9.0"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
 
         object Activity {
-            private const val version = "1.4.0"
-            const val ktx = "androidx.activity:activity-ktx:1.6.1"
+            private const val version = "1.7.1"
+            const val ktx = "androidx.activity:activity-ktx:$version"
         }
 
         object Lifecycle {
-            private const val version = "2.5.1"
+            private const val version = "2.6.1"
             const val viewmodelKtx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$version"
             const val runtimeKtx = "androidx.lifecycle:lifecycle-runtime-ktx:$version"
         }
@@ -45,36 +47,37 @@ object Libs {
         }
 
         object Room {
-            private const val version = "2.4.3"
+            private const val version = "2.5.1"
             const val runtime = "androidx.room:room-runtime:$version"
             const val ktx = "androidx.room:room-ktx:$version"
             const val compiler = "androidx.room:room-compiler:$version"
         }
 
         object Test {
-            private const val version = "1.4.0"
-            const val runner = "androidx.test:runner:$version"
-            const val rules = "androidx.test:rules:$version"
+            private const val rulesVersion = "1.5.0"
+            private const val runnerVersion = "1.5.2"
+            const val runner = "androidx.test:runner:$runnerVersion"
+            const val rules = "androidx.test:rules:$rulesVersion"
 
             object Ext {
-                private const val version = "1.1.3"
+                private const val version = "1.1.5"
                 const val junit = "androidx.test.ext:junit-ktx:$version"
             }
 
             object Espresso{
-                private const val version="3.4.0"
+                private const val version="3.5.1"
                 const val contrib = "androidx.test.espresso:espresso-contrib:$version"
             }
         }
     }
 
     object OkHttp3 {
-        private const val version = "4.10.0"
+        private const val version = "4.11.0"
         const val loginInterceptor = "com.squareup.okhttp3:logging-interceptor:$version"
     }
 
     object Glide {
-        private const val version = "4.14.2"
+        private const val version = "4.15.1"
         const val glide = "com.github.bumptech.glide:glide:$version"
         const val compiler = "com.github.bumptech.glide:compiler:$version"
     }
@@ -94,7 +97,7 @@ object Libs {
     }
 
     object Arrow {
-        private const val version = "1.1.3"
+        private const val version = "1.1.5"
         const val core = "io.arrow-kt:arrow-core:$version"
     }
 
@@ -104,14 +107,14 @@ object Libs {
     }
 
     object Mockito {
-        const val kotlin = "org.mockito.kotlin:mockito-kotlin:4.0.0"
-        const val inline = "org.mockito:mockito-inline:4.4.0"
+        const val kotlin = "org.mockito.kotlin:mockito-kotlin:4.1.0"
+        const val inline = "org.mockito:mockito-inline:5.2.0"
     }
 
     object JavaX {
         const val inject = "javax.inject:javax.inject:1"
     }
 
-    const val turbine = "app.cash.turbine:turbine:0.7.0"
+    const val turbine = "app.cash.turbine:turbine:0.12.3"
 
 }
